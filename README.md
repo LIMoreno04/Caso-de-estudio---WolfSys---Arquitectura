@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tu-usuario/arquitectura/main/logo_wolfsys.png" alt="WolfSys Logo" width="200"/>
+  <img src="https://raw.githubusercontent.com/LIMoreno04/Caso-de-estudio---WolfSys---Arquitectura/main/logo_wolfsys.png" alt="WolfSys Logo" width="200"/>
 </p>
 
 # Caso de estudio: WolfSys

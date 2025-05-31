@@ -1,66 +1,95 @@
 # Contexto del Caso de Estudio WolfSys
+Este documento resume y describe el contexto de la compañía, así como sus requisitos (en esencia el documento con la letra del problema).
+## Descripción de WolfSys
+WolfSys es una empresa tecnológica dedicada al desarrollo y operación de soluciones de portería virtual para edificios residenciales y oficinas. Su propuesta reemplaza al portero tradicional mediante una combinación de dispositivos físicos (cámaras, lectores de tags, sensores de movimiento y tótems con micrófono, audio y visor de video) conectados a una plataforma digital que permite controlar los accesos de forma remota, segura y eficiente.
 
-## Descripción de la empresa
-WolfSys es una empresa tecnológica especializada en soluciones de portería virtual para edificios residenciales y oficinas. Ha reemplazado el portero tradicional con un sistema digital que combina dispositivos físicos (cámaras, lectores de tags, sensores, tótems con micrófono/video) y una plataforma de software que permite controlar accesos y monitorear ingresos en tiempo real.
+- Actualmente, más de 500 edificios utilizan los servicios de WolfSys para gestionar accesos peatonales y vehiculares, monitorear ingresos en tiempo real y facilitar la comunicación entre visitantes y residentes.  
+- Esto abarca cerca de 50.000 usuarios: residentes, funcionarios, personal de servicio y administración.
 
-- **Alcance actual**: Más de 500 edificios cubiertos, alrededor de 50.000 usuarios (residentes, empleados de servicio, administradores).  
-- **Servicios ofrecidos**: Videovigilancia en vivo, apertura remota de puertas, comunicación entre visitantes y residentes, gestión de accesos peatonales y vehiculares.
+## Historia y Estado Actual de la Plataforma
+- **Origen centrado en videovigilancia:**  
+  La plataforma original se diseñó para brindar videovigilancia remota mediante el producto “Tumimeras”. Con el tiempo, se han añadido nuevas funcionalidades (CRM, control de acceso, notificaciones), pero sin un diseño arquitectónico congruente.  
+- **Problemas derivados del crecimiento orgánico:**  
+  - Las implementaciones “sobre la marcha” llevaron a un sistema con alto acoplamiento y baja coherencia, lo que dificulta modificaciones o el despliegue ágil de nuevas funciones.  
+  - A pesar de estas deficiencias, el sistema ha funcionado satisfactoriamente y permitido el crecimiento de la empresa (hasta ahora).
 
-## Situación actual
-1. **Arquitectura heredada y heterogénea**  
-   - El sistema original fue implementado para videovigilancia remota (producto “Tumimeras”). Con el tiempo, se fueron añadiendo módulos (CRM, control de acceso, notificaciones) sin un diseño coherente.  
-   - Los componentes están muy acoplados y son difíciles de modificar o escalar.  
-   - Cada nuevo requerimiento se incorpora “sobre el código existente”, provocando deuda técnica.
+## Demandas y Necesidades Emergentes
+En los últimos años, han surgido nuevas exigencias del mercado y del equipo interno de WolfSys:
 
-2. **Limitaciones en funcionalidad y experiencia**  
-   - Los clientes quieren atender al portero desde el celular, sin depender de una sala de monitoreo fija.  
-   - Falta de integración: la aplicación de vigilancia no muestra datos contextuales (historial de eventos, información de edificio).  
-   - No hay scoring de cámaras ni priorización automática de feeds; se visualizan en orden predefinido o aleatorio.
+1. **Interacción móvil con el portero virtual:**  
+   - Los clientes quieren atender al portero directamente desde el celular y ver cámaras en vivo desde la aplicación móvil.  
+2. **Acceso temporal para visitas:**  
+   - Generar códigos o accesos temporales (PINs) desde la app.  
+3. **Reconocimiento facial y analítica de video:**  
+   - Usar modelos de análisis de imagen para detectar movimiento, presencia humana o reconocimiento facial.  
+4. **Automatización de integraciones:**  
+   - Actualmente, ciertas integraciones (p. ej., contacto con cliente desde el software de cámaras) son manuales; se busca automatizarlas.
 
-3. **Fallas operativas y de resiliencia**  
-   - La lógica de control de acceso (tags, PIN, biometría) depende exclusivamente del servicio central. Al fallar la conexión, el edificio queda sin control, salvo por soluciones manuales.  
-   - Cada edificio tiene hardware distinto (distintas marcas de cámaras, tótems, lectores), lo que dificulta la uniformidad del software.
+## Limitaciones de la Arquitectura Actual
+- **Heterogeneidad de componentes y proveedores:**  
+  - Dispositivos físicos (cámaras, tags, tótems) y servicios de backend muy acoplados que dificultan el despliegue ágil de nuevas funcionalidades.  
+- **Variabilidad en entornos y condiciones de red:**  
+  - Cada edificio cuenta con dispositivos diversos y condiciones de conectividad distintas, lo que exige una solución capaz de operar parcialmente ante fallos de red o servicios centrales.  
+- **Escasa alineación con la visión futura:**  
+  - La arquitectura actual no facilita la incorporación de módulos de IA para reconocer comportamientos de cada edificio, registro de eventos y reportes avanzados, etc.
 
-4. **Necesidades emergentes**  
-   - **Control móvil**: Agentes y residentes quieren ver cámaras en vivo desde su teléfono y recibir notificaciones de llamadas o intentos de acceso.  
-   - **Accesos temporales**: Generar códigos o accesos temporales para visitas desde la app.  
-   - **Reconocimiento facial y analítica de video**: Incorporar modelos de IA para detectar movimiento, presencia humana, e incluso reconocer rostros.  
-   - **Automatización de integraciones**: Conectar la aplicación de monitoreo con el CRM, de modo que, por ejemplo, al recibir un incidente, se genere automáticamente un ticket en el CRM.  
-   - **Gestión centralizada de clientes**: El CRM actual no centraliza toda la historia de interacciones (solicitudes de soporte, registros de acceso, eventos de video).
+## Decisión de Rediseño
+Por todo lo anterior, WolfSys ha decidido iniciar un rediseño profundo de su plataforma. El objetivo es alcanzar una arquitectura que sea:
 
-5. **Requerimientos no funcionales clave**  
-   - **Alta disponibilidad**: El sistema debe estar operativo casi todo el tiempo; no pueden producirse caídas frecuentes.  
-   - **Baja latencia en video**: La transmisión de cámaras en vivo debe ser fluida, con latencia mínima (menos de 200 ms).  
-   - **Seguridad y trazabilidad**: Los accesos físicos y cambios de configuración deben registrarse de forma inalterable.  
-   - **Operación local con conectividad limitada**: Cada edificio debe poder validar tags o PINs aún si no hay internet, asumiendo capacidades reducidas (por ejemplo, solo tags).  
-   - **Escalabilidad**: A medida que crezca la base de edificios y usuarios, el sistema debe poder desplegar más instancias de servicios sin reescribir componentes enteros.
+- **Flexible y escalable,** para soportar la cantidad creciente de edificios y usuarios.  
+- **Resiliente,** capaz de funcionar con funcionalidades básicas incluso ante fallos de conectividad o energía.  
+- **Extensible,** permitiendo incorporar futuras capacidades de IA, scoring, automatización, y nuevos servicios con mínimo impacto en el sistema existente.
 
-## Motivación del rediseño
-- La arquitectura actual impide desplegar nuevas funcionalidades ágilmente.
-- La heterogeneidad de componentes y proveedores dificulta el mantenimiento.
-- WolfSys desea consolidar todo el flujo de información (video, CRM, control de acceso) en una plataforma coherente.
-- Se busca sentar las bases para incorporar analítica avanzada y mejorar la eficiencia operativa.
-- El rediseño no solo debe atender las necesidades presentes, sino contemplar la visión futura: escalabilidad a miles de edificios, adopción de IA y expansión de servicios.
+## Requerimientos Funcionales y No Funcionales
 
-## Desafíos principales
-1. **Compatibilidad con hardware diverso**  
-   - Dispositivos de distinta antigüedad y proveedor deben continuar funcionando bajo la nueva plataforma.  
-   - Todos hablan protocolos IP (HTTP, RTSP), pero es necesario un intermediario (Edge Service) que facilite la interoperabilidad.
+### 1. Videovigilancia
+- WolfSys despliega cámaras en accesos, espacios comunes y perímetros.  
+- Los streams de video se procesan con “Tumimeras” (licencia) para transmisión a escala.  
+- Cada stream requiere autenticación que identifique la cámara origen.  
+- Existen endpoints HTTP en Tumimeras para listar y acceder a feeds en vivo.  
+- **Atributo crítico:** baja latencia en la transmisión de video.
 
-2. **Garantizar funcionamiento en entornos desconectados**  
-   - Implementar un componente local (Embedded Access Controller) que almacene reglas de acceso y logs cuando no haya conexión.  
+### 2. Agentes de Vigilancia
+- Nuevo objetivo: construir una aplicación única que integre toda la información relevante para agentes de vigilancia:
+  - Contexto de edificio (historial de eventos, información del residente).  
+  - Control de cámaras, intervención de voz, apertura de puertas, registro de incidentes, escalamiento a móvil/policía.  
+- **Scoring de cámaras:**  
+  - Priorizar feeds según criterios (ubicación, tipo de edificio, criticidad, detección de movimiento, presencia humana, reconocimiento facial).  
+  - Inicialmente manual, con vistas a alimentar el scoring con modelos de IA o reglas contextuales.
 
-3. **Seguridad y gestión de datos sensibles**  
-   - Manejar flujos de video en tiempo real con cifrado, proteger la privacidad de los residentes y cumplir regulaciones locales.  
-   - El CRM debe cumplir con estándares de confidencialidad para datos personales.
+### 3. CRM
+- Debe centralizar la información de cada edificio y su historial:  
+  - Infraestructura física instalada.  
+  - Registros de accesos, solicitudes de soporte, generación de PINs, revisiones de video, etc.  
+- El CRM servirá como fuente para otros módulos (aplicación móvil, panel de vigilancia).  
+- **Ejemplo de uso:**  
+  - Un residente solicita un video ocurrido hace dos semanas; el sistema debe permitir buscar, registrar y resolver la solicitud desde el CRM.
 
-4. **Evolución gradual y migración**  
-   - No se puede reemplazar de golpe toda la plataforma; debe diseñarse un plan de migración que permita coexistir con el sistema antiguo hasta que el nuevo esté listo.  
-   - Definir puntos de integración (APIs, colas de mensajes) que sirvan como “puentes” entre lo viejo y lo nuevo.
+### 4. Control de Acceso
+- Múltiples métodos de acceso:  
+  - Llave digital (tag), código PIN, intervención remota (agente o residente), biometría (huella/reconocimiento facial).  
+- Lógica de validación “centralizable” pero capaz de operar parcialmente sin conectividad (cada edificio debe funcionar de forma autónoma con capacidades mínimas, p. ej. solo tags).  
+- Sistemas UPS en edificios para mantener la operación ante cortes eléctricos.  
+- Todos los accesos (tags, códigos) deben gestionarse desde distintas aplicaciones y llevar un registro riguroso e inalterable.
 
-## Alcance de este caso de estudio
-- Definir la **arquitectura lógica y física** de la nueva plataforma (diagramas C4, despliegue, secuencia).  
-- Establecer **Architectural Decision Records (ADRs)** para justificar cada elección de tecnología o patrón arquitectónico.  
-- Documentar los **principios de diseño**, **módulos principales** (Videovigilancia, CRM, Control de Acceso, Interfaz Móvil, Interfaz Administrativa) y sus interrelaciones.  
-- Proponer un esbozo de **plan de migración** (no implementación detallada).  
-- Elaborar la **visión general** (visión.md), el **contexto de negocio y técnico** (este archivo), y un **índice organizativo** (índice.md) que guíe la consulta de todos los documentos generados.
+### 5. Aplicación Móvil para Usuarios
+- Módulo que permita a residentes y administradores:  
+  - Ver cámaras en vivo.  
+  - Recibir notificaciones de intentos de ingreso o llamadas desde el portero.  
+  - Generar accesos temporales (PINs) y abrir puertas a distancia.  
+- Debe integrarse con el CRM y el sistema de monitoreo, reflejando datos en tiempo real.
+
+### 6. Interfaz Administrativa
+- Permitir la gestión de usuarios, propiedades e instalaciones (hardware).  
+- Control de configuraciones sensibles (tipos de usuario, servicios contratados, equipos en cada punto).  
+- Registro de todas las actividades de administración (auditoría).
+
+### 7. Otras Consideraciones Técnicas
+- WolfSys lleva más de 5 años instalando porteros con distintos terminales (comportamientos y protocolos variados), pero todos ofrecen conectividad IP (Ethernet) y usan encodings comunes de audio y video.  
+- Las cámaras se conectan por Wi-Fi o Ethernet con protocolos y codecs estandarizados.  
+- Se debe permitir dar de alta cámaras y dispositivos variados dentro de un mismo edificio.  
+- **Almacenamiento de video:**  
+  - Videos de hasta 3 meses en “modo caliente” (acceso instantáneo).  
+  - Videos mayores a 3 meses pueden archivarse para almacenamiento a menor costo, manteniendo históricos para entrenar modelos en el futuro.
+
+---

@@ -73,7 +73,6 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 
 - **Infraestructura de Respaldo Eléctrico (UPS) ???**  
   - Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía.  
-  - Asegura operación mínima de control de acceso físico incluso sin alimentación principal.
 
 ## 4. Requerimientos Funcionales Clave
 1. **Videovigilancia**  

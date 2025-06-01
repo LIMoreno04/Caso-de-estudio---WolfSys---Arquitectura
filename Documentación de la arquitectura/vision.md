@@ -84,7 +84,8 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 1. **Videovigilancia**  
    - Conectar y autenticar streams de video provenientes de cámaras en accesos, espacios comunes y perímetros a través de “Tumimeras”.  
    - Listar mediante API HTTP los feeds disponibles y permitir su consumo en tiempo real.  
-   - Configurar almacenamiento en caliente de video (hasta 3 meses) y acceso eficiente a archivos históricos.  
+   - Configurar almacenamiento en caliente de video (hasta 3 meses) y acceso eficiente a archivos históricos.
+   - Las cámaras de videovigilancia se conectan por WiFi o Ethernet, y todas soportan los mismos protocolos y encodings.  
 2. **Interfaz Unificada para Agentes**  
    - Mostrar en una sola vista los distintos feeds priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
    - Centralizar acciones desde la interfaz: intervención por voz, apertura de puerta, registro de incidente, escalado a móvil o policía.  

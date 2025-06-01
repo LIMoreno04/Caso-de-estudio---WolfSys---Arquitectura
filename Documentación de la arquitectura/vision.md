@@ -33,7 +33,8 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
   - Interviene mediante comunicación de voz.
   - Interviene mediante solicitud de apertura de puerta.  
-  - Registra incidentes y escala alertas a móvil o policía.  
+  - Registra incidentes.
+  - Escalar alertas a móvil o policía.  
   - Consulta el historial de eventos de un determinado feed o ubicación.
 
 - **Administrador del Edificio**  

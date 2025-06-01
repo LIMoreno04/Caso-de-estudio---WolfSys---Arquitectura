@@ -30,22 +30,23 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 - **Agente de Vigilancia**  
   - Inicia sesión en la consola unificada.  
   - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
-  - Interviene mediante comunicación de voz o solicitud de apertura de puerta.  
+  - Interviene mediante comunicación de voz.
+  - Interviene mediante solicitud de apertura de puerta.  
   - Registra incidentes y escala alertas a móvil o policía.  
   - Consulta el historial de eventos de un determinado feed o ubicación.
 
 - **Administrador del Edificio**  
   - Gestiona propiedades y configuraciones de servicios contratados (torre, complejo, torre ejecutiva).  
   - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
-  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en cada instalación.  
+  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
   - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
 
 - **Personal Técnico de WolfSys**  
-  - Configura equipos e instalaciones en campo.  
+  - Configura equipos e instalaciones.  
   - Da de alta cámaras y dispositivos con sus credenciales de red.  
   - Supervisa el funcionamiento de los Edge Controllers en cada edificio y sincronización de logs con el servidor central.
 
-- **Dispositivo Edge (Controlador Local)**  
+- **Dispositivo Edge (Controlador Local) ???**  
   - Valida PINs y tags localmente cuando no hay conexión a internet.  
   - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
   - Cambia a modo degradado si falla un componente central.
@@ -57,21 +58,17 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - Genera accesos temporales (PIN o enlace) para visitas.  
   - Ejecuta apertura remota de puerta o barrera.
 
-- **Cliente Corporativo / Dueño de Edificio**  
-  - Supervisa el estado general de los servicios contratados.  
-  - Recibe reportes de uso, incidentes y métricas de desempeño (tiempo de respuesta de agentes, latencia de video, disponibilidad).
-
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
   - Autentica cámaras y entrega streams de video a escala.  
   - Provee almacenamiento en caliente de hasta 3 meses de video.  
   - Expone endpoints HTTP para listar y consumir feeds disponibles.
 
-- **Módulos de Inteligencia Artificial / Scoring (futuros)**  
+- **Módulos de Inteligencia Artificial / Scoring (futuros) ???**  
   - Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
   - Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
   - Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
 
-- **Infraestructura de Respaldo Eléctrico (UPS)**  
+- **Infraestructura de Respaldo Eléctrico (UPS) ???**  
   - Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía.  
   - Asegura operación mínima de control de acceso físico incluso sin alimentación principal.
 

@@ -25,56 +25,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - Sustitución del sistema de procesamiento y transmisión de video (Tumimeras se mantiene en uso).  
   - Implementación detallada de modelos de IA o scoring avanzado (la arquitectura debe prever su integración futura, pero no desarrollarla plenamente).
 
-## 3. Actores Principales y Casos de Uso
-### 3.1 Actores Internos
-- **Agente de Vigilancia**  
-  - Inicia sesión en la consola unificada.
-  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). 
-  - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
-  - Interviene mediante comunicación de voz.
-  - Interviene mediante solicitud de apertura de puerta.  
-  - Registra incidentes.
-  - Escalar alertas a móvil o policía.  
-  - Consulta el historial de eventos de un determinado feed o ubicación.
-
-- **Administrador del Edificio**  
-  - Gestiona propiedades y configuraciones de servicios contratados (torre, complejo, torre ejecutiva).  
-  - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
-  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
-  - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
-
-- **Personal Técnico de WolfSys**  
-  - Configura equipos e instalaciones.  
-  - Da de alta cámaras y dispositivos con sus credenciales de red.  
-  - Supervisa el funcionamiento de los Edge Controllers en cada edificio y sincronización de logs con el servidor central.
-
-- **Dispositivo Edge (Controlador Local) ???**  
-  - Valida PINs y tags localmente cuando no hay conexión a internet.  
-  - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
-  - Cambia a modo degradado si falla un componente central.
-
-### 3.2 Actores Externos
-- **Residente / Usuario Final**  
-  - Iniciar sesión.
-  - Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
-  - Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
-  - Genera accesos temporales (PIN o enlace) para visitas.  
-  - Ejecuta apertura remota de puerta o barrera.
-
-- **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - Autentica cámaras y entrega streams de video a escala.  
-  - Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - Expone endpoints HTTP para listar y consumir feeds disponibles.
-
-- **Módulos de Inteligencia Artificial / Scoring (futuros) ???**  
-  - Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
-  - Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
-  - Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
-
-- **Infraestructura de Respaldo Eléctrico (UPS) ???**  
-  - Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía.  
-
-## 4. Requerimientos Funcionales Clave
+## 3. Requerimientos Funcionales Clave
 1. **Videovigilancia**  
    - Conectar y autenticar streams de video provenientes de cámaras en accesos, espacios comunes y perímetros a través de “Tumimeras”.  
    - Listar mediante API HTTP los feeds disponibles y permitir su consumo en tiempo real.  
@@ -106,7 +57,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
    - Gestión de instalaciones y dispositivos (cámaras, lectores, tótems), que permite al equipo tecnico gestionar informacion sobre los equipor en diferentes puntos, denominados instalaciones.
    - Registro y control de todas las operaciones de configuración con logs inmutables.
 
-## 5. Requerimientos No Funcionales Prioritarios
+## 4. Requerimientos No Funcionales Prioritarios
 1. **Disponibilidad y Resiliencia**  
    - La plataforma debe tolerar fallos parciales de red o energía. Los Edge Controllers en cada edificio deben operar en modo degradado (ej: solo tags) cuando no hay conectividad o energía principal (gracias a UPS).  
    - Garantizar al menos 99.9 % de uptime en los servicios centrales de autenticación, CRM y transmisión de video.  
@@ -132,6 +83,55 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
    - Documentación clara de APIs, diagramas actualizados y ADRs para justificar decisiones.  
    - Uso de pipelines de CI/CD para despliegue ágil, con pruebas automatizadas (unitarias e integración).  
    - Estandarización de convenciones (nomenclatura de servicios, contratos de API, formatos de logs).
+
+## 5. Actores Principales y sus Casos de Uso
+### 5.1 Actores Administrativos
+- **Agente de Vigilancia**  
+  - Inicia sesión en la consola unificada.
+  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). 
+  - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
+  - Interviene mediante comunicación de voz.
+  - Interviene mediante solicitud de apertura de puerta.  
+  - Registra incidentes.
+  - Escalar alertas a móvil o policía.  
+  - Consulta el historial de eventos de un determinado feed o ubicación.
+
+- **Administrador del Edificio**  
+  - Gestiona propiedades y configuraciones de servicios contratados (torre, complejo, torre ejecutiva).  
+  - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
+  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
+  - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
+
+- **Personal Técnico de WolfSys**  
+  - Configura equipos e instalaciones.  
+  - Da de alta cámaras y dispositivos con sus credenciales de red.  
+  - Supervisa el funcionamiento de los Edge Controllers en cada edificio y sincronización de logs con el servidor central.
+
+- **Dispositivo Edge (Controlador Local) ???**  
+  - Valida PINs y tags localmente cuando no hay conexión a internet.  
+  - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
+  - Cambia a modo degradado si falla un componente central.
+
+### 5.2 Actores de Consumo y Servicios
+- **Residente / Usuario Final**  
+  - Iniciar sesión.
+  - Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
+  - Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
+  - Genera accesos temporales (PIN o enlace) para visitas.  
+  - Ejecuta apertura remota de puerta o barrera.
+
+- **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
+  - Autentica cámaras y entrega streams de video a escala.  
+  - Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - Expone endpoints HTTP para listar y consumir feeds disponibles.
+
+- **Módulos de Inteligencia Artificial / Scoring (futuros) ???**  
+  - Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
+  - Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
+  - Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
+
+- **Infraestructura de Respaldo Eléctrico (UPS) ???**  
+  - Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía. 
 
 ## 6. Vista de Componentes de Alto Nivel
 1. **Módulo de Ingestión de Video (“Gateway de Video”)**  

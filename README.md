@@ -1,5 +1,5 @@
 <p align="right">
-  <img src="/logo.png" alt="WolfSys Logo" width="200"/>
+  <img src="logo.png" alt="WolfSys Logo" width="200"/>
 </p>
 
 # Caso de estudio: WolfSys

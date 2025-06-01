@@ -28,7 +28,8 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 ## 3. Actores Principales y Casos de Uso
 ### 3.1 Actores Internos
 - **Agente de Vigilancia**  
-  - Inicia sesión en la consola unificada.  
+  - Inicia sesión en la consola unificada.
+  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). 
   - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
   - Interviene mediante comunicación de voz.
   - Interviene mediante solicitud de apertura de puerta.  

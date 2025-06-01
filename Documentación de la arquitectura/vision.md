@@ -55,6 +55,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 
 ### 3.2 Actores Externos
 - **Residente / Usuario Final**  
+  - Iniciar sesión.
   - Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
   - Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
   - Genera accesos temporales (PIN o enlace) para visitas.  

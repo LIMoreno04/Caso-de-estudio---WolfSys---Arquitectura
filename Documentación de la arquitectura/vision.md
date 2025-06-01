@@ -23,7 +23,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 - **Excluye**  
   - Desarrollo de nuevos sistemas de cámaras o lectores (se asume compatibilidad con dispositivos existentes).  
   - Sustitución del sistema de procesamiento y transmisión de video (Tumimeras se mantiene en uso).  
-  - Implementación detallada de modelos de IA o scoring avanzado (la arquitectura debe prever su integración futura, pero no desarrollarla plenamente).
+  - Implementación detallada de modelos de IA o scoring avanzado (la arquitectura debe prever su integración futura, pero no desarrollarla).
 
 ## 3. Requerimientos Funcionales Clave
 1. **Videovigilancia**  

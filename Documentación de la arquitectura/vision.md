@@ -108,8 +108,8 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 7. **Interfaz Administrativa**  
    - CRUD de propiedades (torre, complejo, ejecutiva) y sus configuraciones de servicios contratados.  
    - Gestión de usuarios (residentes, personal de servicio, administradores, agentes) con asignación de roles y permisos.  
-   - Gestión de instalaciones y dispositivos (cámaras, lectores, tótems), incluyendo protocolos de red y credenciales.  
-   - Auditoría de todas las operaciones de configuración con logs inmutables.
+   - Gestión de instalaciones y dispositivos (cámaras, lectores, tótems), que permite al equipo tecnico gestionar informacion sobre los equipor en diferentes puntos, denominados instalaciones.
+   - Registro y control de todas las operaciones de configuración con logs inmutables.
 
 ## 5. Requerimientos No Funcionales Prioritarios
 1. **Disponibilidad y Resiliencia**  

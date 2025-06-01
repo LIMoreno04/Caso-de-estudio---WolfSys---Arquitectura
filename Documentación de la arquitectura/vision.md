@@ -34,11 +34,6 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - Registra incidentes y escala alertas a móvil o policía.  
   - Consulta el historial de eventos de un determinado feed o ubicación.
 
-- **Usuario del CRM (Equipo de Soporte / Operaciones)**  
-  - Busca histórico de accesos, solicitudes de soporte o generación de PINs para una unidad o residente.  
-  - Gestiona reenvío de videos históricos a residentes.  
-  - Registra tickets de soporte vinculados a eventos de video o control de acceso.
-
 - **Administrador del Edificio**  
   - Gestiona propiedades y configuraciones de servicios contratados (torre, complejo, torre ejecutiva).  
   - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  

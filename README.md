@@ -1,8 +1,9 @@
 
-# Caso de estudio: WolfSys ![WolfSys Logo](logo.png)
+# Caso de estudio: WolfSys ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎  ![WolfSys Logo](logo.png)
 Este repositorio contiene nuestra propuesta de arquitectura para el sistema de portería virtual de **WolfSys**, diseñado para reemplazar al portero tradicional en edificios residenciales y oficinas. 
-### **Materia Arquitectura y Diseño de Aplicaciones**  
-### **Universidad de Montevideo**
+
+**Materia Arquitectura y Diseño de Aplicaciones**  
+**Universidad de Montevideo**
 ## Grupo
 
 - **Sophia Guerra**  

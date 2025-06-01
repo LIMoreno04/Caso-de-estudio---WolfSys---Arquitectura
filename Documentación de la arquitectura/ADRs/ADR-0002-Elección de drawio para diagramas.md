@@ -105,6 +105,3 @@ Se opta por **draw.io** como herramienta principal para diseñar y versionar los
 4. Al usar una solución gratuita y abierta, no habrá barreras de acceso ni dependencias comerciales.  
 5. Se deberá acordar un estilo común (colores, formas, nomenclatura) para los diagramas, ya que draw.io no impone un estándar visual único.
 
-## Comentarios
-
-Para facilitar la uniformidad, se creará en el repositorio un archivo `diagram-styles.drawio` con plantillas y paletas de colores acordadas por el equipo.

@@ -11,9 +11,6 @@ Este repositorio contiene nuestra propuesta de arquitectura para el sistema de p
 
 ## Estructura del Repositorio
 
-- **`README.md`**  
-  Este documento.
-
 - **`documentación-de-la-arquitectura/contexto.md`**  
   Describe el negocio de WolfSys, la plataforma actual, necesidades emergentes y motivaciones para el rediseño.
 

@@ -4,21 +4,21 @@ Este documento constituye nuestra “visión” de la arquitectura de WolfSys pa
 ## 1. Objetivo General
 Diseñar una arquitectura modular, escalable y resiliente para la plataforma de portería virtual de WolfSys, de modo que permita:
 - Gestionar videovigilancia remota con baja latencia y alta disponibilidad.  
-- Unificar la experiencia de agentes de vigilancia con acceso a información contextual y control integrado de puertas.  
-- Centralizar la gestión de edificios, residentes y dispositivos en un CRM que sirva de fuente confiable para todos los módulos.  
+- Unificar la experiencia de agentes de vigilancia con acceso a información contextual y control de puertas integrado desde una aplicación web.  
+- Centralizar la información y la gestión de edificios, residentes y dispositivos en un CRM que sirva de fuente confiable para todos los módulos.  
 - Asegurar capacidades de control de acceso físico incluso ante fallos de conectividad o energía.  
-- Facilitar a usuarios finales (residentes, administradores) una aplicación móvil para visualizar cámaras, recibir notificaciones y otorgar accesos temporales.  
+- Ofrecer una aplicación móvil a los usuarios finales (residentes, administradores del edificio) que permita la visualización de cámaras, recibir notificaciones y otorgar accesos temporales.  
 - Mantener un registro inalterable de eventos críticos (accesos, intervenciones, cambios de configuración).  
-- Expandirse en el futuro para integrar análisis de video con IA, scoring dinámico de cámaras y automatización de procesos.
+- Prever una expansión en el futuro para integrar análisis de video con IA, scoring dinámico de cámaras y automatización de procesos.
 
 ## 2. Alcance y Fronteras del Sistema
 - **Incluye**  
   - Gestión y transmisión de streams de video desde cámaras instaladas en edificios (accesos, espacios comunes, perímetros).  
-  - Consola unificada para agentes de vigilancia, con feeds priorizados, herramientas de intervención y registro de eventos.  
-  - Módulo CRM que centraliza información de cada edificio, historial de interacciones (accesos, soporte, generación de PINs, revisiones de video).  
+  - Aplicación unificada para agentes de vigilancia, con feeds priorizados, herramientas de intervención y registro de eventos.  
+  - Módulo CRM que centraliza información de cada edificio y un historial de interacciones (accesos, soporte, generación de PINs, revisiones de video).  
   - Subsistema de control de acceso físico que agrega múltiples métodos (tags, PIN, biometría, intervención remota) y soporta operación local en modo degradado.  
-  - Aplicación móvil para residentes y administradores con funcionalidad de monitoreo de cámaras, notificaciones, generación de accesos temporales y apertura remota de puertas.  
-  - Interfaz administrativa para gestión de propiedades, usuarios, roles, dispositivos e instalación.  
+  - Aplicación móvil para residentes y administraciones con funcionalidad de monitoreo de cámaras, notificaciones, generación de accesos temporales, apertura remota de puertas; y en el caso de las administraciones, gestión de los residentes de ese edificio.  
+  - Interfaz administrativa para gestión de propiedades, usuarios, roles, dispositivos e instalaciones de WolfSys.  
   - Infraestructura de almacenamiento de video con retención en “modo caliente” (hasta 3 meses) y archivo histórico.  
 - **Excluye**  
   - Desarrollo de nuevos sistemas de cámaras o lectores (se asume compatibilidad con dispositivos existentes).  
@@ -28,97 +28,101 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 ## 3. Requerimientos Funcionales Clave
 1. **Videovigilancia**  
    - Conectar y autenticar streams de video provenientes de cámaras en accesos, espacios comunes y perímetros a través de “Tumimeras”.  
-   - Listar mediante API HTTP los feeds disponibles y permitir su consumo en tiempo real.  
+   - Listar mediante API HTTP los feeds disponibles y permitir su visualización en tiempo real.  
    - Configurar almacenamiento en caliente de video (hasta 3 meses) y acceso eficiente a archivos históricos.
    - Las cámaras de videovigilancia se conectan por WiFi o Ethernet, y todas soportan los mismos protocolos y encodings.  
 2. **Interfaz Unificada para Agentes**  
-   - Mostrar en una sola vista los distintos feeds priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
+   - Mostrar en una sola vista los distintos feeds priorizados según criterios estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial).  
    - Centralizar acciones desde la interfaz: intervención por voz, apertura de puerta, registro de incidente, escalado a móvil o policía.  
-   - Registrar cada intervención como evento trazable en el sistema (inmutabilidad de logs).  
+   - Registrar cada intervención como evento trazable en el sistema (logs inmutables).  
 3. **Módulo de Scoring de Cámaras**  
-   - Definir manualmente (inicialmente) prioridades de cámaras y exponerlas en la interfaz.  
+   - Definir de forma manual (inicialmente) prioridades de cámaras y exponerlas en la interfaz.  
    - Permitir futura integración de modelos de IA o reglas contextuales para ajustar scores dinámicamente.  
 4. **CRM Integrado**  
    - Almacenar toda la información de edificios, unidades y residentes: infraestructura, histórico de accesos, solicitudes de soporte, generación de PINs, revisiones de video.  
    - Registrar de forma inalterable cada solicitud, cambio o reenvío de PIN/video.  
-   - Exponer servicios web (RESTful) para que otros módulos (aplicación móvil, consola de vigilancia) consuman datos del CRM en tiempo real.  
+   - Exponer servicios para que otros módulos (aplicación móvil, interfaz administrativa) consuman datos del CRM en tiempo real.  
 5. **Control de Acceso Físico**  
    - Validar accesos mediante distintos métodos: tag (RFID), código PIN, intervención remota (agente o residente) y biometría (huella o reconocimiento facial).  
-   - Centralizar la lógica de validación en un componente de autorización, pero habilitar operación local autónoma (modo degradado) en cada edificio ante fallo de conectividad.  
-   - Gestionar creación, revocación y expiración de llaves y códigos, registrando cada uso en un log inalterable.  
+   - Centralizar la lógica de validación en un componente de autorización, pero habilitar operación local autónoma (modo degradado) en cada edificio ante fallo de conectividad mediante dispositivos "Edge Controllers".  
+   - Gestionar creación, uso y expiración de llaves y códigos, registrando cada uso en un log inalterable.  
 6. **Aplicación Móvil para Usuarios Finales**  
    - Visualizar en tiempo real los feeds de cámaras del propio edificio.  
    - Recibir notificaciones push ante intentos de ingreso o llamadas al portero.  
    - Generar accesos temporales (PIN o enlace) para visitantes.  
    - Ejecutar comandos remotos: apertura de puerta o barrera.  
 7. **Interfaz Administrativa**  
-   - CRUD de propiedades (torre, complejo, ejecutiva) y sus configuraciones de servicios contratados.  
-   - Gestión de usuarios (residentes, personal de servicio, administradores, agentes) con asignación de roles y permisos.  
-   - Gestión de instalaciones y dispositivos (cámaras, lectores, tótems), que permite al equipo tecnico gestionar informacion sobre los equipor en diferentes puntos, denominados instalaciones.
+   - Para los usuarios administrativos de WolfSys: CRUD de propiedades (torre, complejo, ejecutiva) y sus configuraciones de servicios contratados.  
+   - Para los usuarios administrativos de WolfSys: Gestión de usuarios (residentes, personal de servicio, administración, agentes) con asignación de roles y permisos.
+   - Para la administración del edificio: Gestión únicamente de los residentes de su edificio.
+   - Para el equipo técnico de WolfSys: gestionar informacion sobre los equipos en diferentes puntos, denominados instalaciones.
    - Registro y control de todas las operaciones de configuración con logs inmutables.
 
-## 4. Requerimientos No Funcionales Prioritarios
+## 4. Requerimientos No Funcionales Priorizados
 1. **Disponibilidad y Resiliencia**  
    - La plataforma debe tolerar fallos parciales de red o energía. Los Edge Controllers en cada edificio deben operar en modo degradado (ej: solo tags) cuando no hay conectividad o energía principal (gracias a UPS).  
    - Garantizar al menos 99.9 % de uptime en los servicios centrales de autenticación, CRM y transmisión de video.  
 2. **Baja Latencia**  
-   - Transmisión end-to-end de video en tiempo real con latencia inferior a 200 ms para agentes de vigilancia.  
+   - Transmisión end-to-end de video en tiempo real con latencia inferior a 200 ms para agentes de vigilancia (mediante "Tumimeras").  
    - Respuestas de la aplicación móvil y panel administrativo inferiores a 2 s para operaciones críticas (consulta de feed en vivo, generación de PIN, apertura de puerta).  
 3. **Escalabilidad**  
-   - Capacidad de escalar horizontalmente los servicios de ingestión y distribución de video (“Tumimeras” y/o componentes propios).  
+   - Capacidad de escalar horizontalmente los servicios de procesamiento y distribución de video (conexión a “Tumimeras” y componentes que asistan el proceso).  
    - Base de datos del CRM y recursos de cache (scoring de cámaras) deben poder aumentarse según crezca la base de edificios y usuarios.  
 4. **Seguridad y Confidencialidad**  
-   - Implementar autenticación y autorización robustas para todos los endpoints (por ejemplo, OAuth 2.0 o OpenID Connect).  
-   - Cifrado de datos en tránsito (TLS 1.2+) y en reposo (bases de datos, almacenamiento de video).  
-   - Control de acceso basado en roles (RBAC) con separación clara de funciones entre residentes, agentes, administradores y sistemas externos.  
-5. **Auditabilidad e Inmutabilidad**  
+   - Implementar autenticación y autorización robustas para todos los endpoints (utilizando algún estándar con reputación).  
+   - Cifrado de datos en tránsito y en reposo (bases de datos, almacenamiento de video).  
+   - Control de acceso basado en roles con separación clara de funciones entre residentes, administración, agentes, técnicos y sistemas externos.
    - Todos los logs de accesos, cambios de configuración, generación de PINs, intervenciones y consultas al CRM deben ser inmutables y rastreables.  
-   - Mantener historiales completos para auditorías y análisis forense en caso de incidentes.  
-6. **Interoperabilidad**  
-   - Exponer APIs RESTful bien definidas para facilitar integración con sistemas externos (apps de administración de edificios, futuros módulos de IA).  
+   - Mantener historiales completos para auditorías y permitir análisis en caso de incidentes.   
+5. **Interoperabilidad**  
+   - Exponer APIs bien definidas para facilitar integración con sistemas externos (apps de administración de edificios, futuros módulos de IA).  
    - Soportar protocolos estándar de video (RTSP, HLS) para garantizar compatibilidad con dispositivos heterogéneos.  
-7. **Extensibilidad**  
-   - Arquitectura modular (microservicios o modular monolítico) que permita agregar nuevos servicios (p. ej. análisis de video con IA, scoring avanzado) sin impacto significativo en componentes existentes.  
-8. **Mantenibilidad**  
-   - Documentación clara de APIs, diagramas actualizados y ADRs para justificar decisiones.  
-   - Uso de pipelines de CI/CD para despliegue ágil, con pruebas automatizadas (unitarias e integración).  
+6. **Extensibilidad**  
+   - Arquitectura modular que permita agregar nuevos servicios (p. ej. análisis de video con IA, scoring avanzado) sin impacto significativo en componentes existentes.  
+7. **Mantenibilidad**  
+   - Documentación clara, diagramas actualizados y ADRs para justificar decisiones.
+   - Modularidad y separación de responsabilidades para aislar errores y facilitar el entendimiento del sistema.  
    - Estandarización de convenciones (nomenclatura de servicios, contratos de API, formatos de logs).
 
 ## 5. Actores Principales y sus Casos de Uso
-### 5.1 Actores Administrativos
-- **Agente de Vigilancia**  
-  - Inicia sesión en la consola unificada.
-  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). 
-  - Visualiza feeds de cámaras priorizados según criterios estáticos (ubicación, tipo de acceso) y dinámicos (detección de movimiento, reconocimiento facial).  
-  - Interviene mediante comunicación de voz.
-  - Interviene mediante solicitud de apertura de puerta.  
-  - Registra incidentes.
-  - Escalar alertas a móvil o policía.  
-  - Consulta el historial de eventos de un determinado feed o ubicación.
-
-- **Administrador del Edificio**  
-  - Gestiona propiedades y configuraciones de servicios contratados (torre, complejo, torre ejecutiva).  
-  - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
-  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
-  - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
-
-- **Personal Técnico de WolfSys**  
-  - Configura equipos e instalaciones.  
-  - Da de alta cámaras y dispositivos con sus credenciales de red.  
-  - Supervisa el funcionamiento de los Edge Controllers en cada edificio y sincronización de logs con el servidor central.
-
-- **Dispositivo Edge (Controlador Local) ???**  
-  - Valida PINs y tags localmente cuando no hay conexión a internet.  
-  - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
-  - Cambia a modo degradado si falla un componente central.
-
-### 5.2 Actores de Consumo y Servicios
+### 5.1 Actores de Consumo (el sistema les proveé servicios)
 - **Residente / Usuario Final**  
   - Iniciar sesión.
   - Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
   - Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
   - Genera accesos temporales (PIN o enlace) para visitas.  
   - Ejecuta apertura remota de puerta o barrera.
+
+- **Agente de Vigilancia**  
+  - Inicia sesión en la aplicación web.
+  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial).
+  - Visualiza feeds de cámaras priorizados según sus criterios.  
+  - Interviene mediante comunicación de voz.
+  - Interviene mediante solicitud de apertura de puerta.  
+  - Registra incidentes.
+  - Escalar alertas a móvil o policía.  
+  - Consulta el historial de eventos de un determinado feed o ubicación.
+
+- **Administrador de WolfSys**  
+  - Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).  
+  - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
+  - Da de alta o baja dispositivos (cámaras, lectores, tótems).  
+  - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
+
+- **Administrador del Edificio**  
+  - Gestiona los usuarios residentes de su edificio.  
+  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  ???
+  - Revisa logs de eventos en su edificio. ???
+
+- **Personal Técnico de WolfSys**  
+  - Configura y gestiona equipos e instalaciones.  
+
+- **Dispositivo Edge (Controlador Local) ???**  
+  - Valida PINs y tags localmente cuando no hay conexión a internet.  
+  - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
+  - Cambia a modo degradado si falla un componente central.
+
+### 5.2 Actores de Servicios (proveén un servicio al sistema)
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
   - Autentica cámaras y entrega streams de video a escala.  

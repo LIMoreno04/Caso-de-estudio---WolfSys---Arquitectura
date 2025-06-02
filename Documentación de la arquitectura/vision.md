@@ -87,55 +87,55 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 ## 5. Actores Principales y sus Casos de Uso
 ### 5.1 Actores de Consumo (el sistema les proveé servicios)
 - **Residente / Usuario Final**  
-  - Iniciar sesión.
-  - Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
-  - Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
-  - Genera accesos temporales (PIN o enlace) para visitas.  
-  - Ejecuta apertura remota de puerta o barrera.
+  - **C.U. 1:** Iniciar sesión en la aplicación móvil.
+  - **C.U. 2:** Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  
+  - **C.U. 3:** :Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
+  - **C.U. 4:** Genera accesos temporales (PIN o enlace) para visitas.  
+  - **C.U. 5:** Ejecuta apertura remota o en sitio de puerta o barrera.
 
 - **Agente de Vigilancia**  
-  - Inicia sesión en la aplicación web.
-  - Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial).
-  - Visualiza feeds de cámaras priorizados según sus criterios.  
-  - Interviene mediante comunicación de voz.
-  - Interviene mediante solicitud de apertura de puerta.  
-  - Registra incidentes.
-  - Escalar alertas a móvil o policía.  
-  - Consulta el historial de eventos de un determinado feed o ubicación.
+  - **C.U. 6:** Inicia sesión en la aplicación web.
+  - **C.U. 7:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial).
+  - **C.U. 8:** Visualiza feeds de cámaras priorizados según sus criterios.  
+  - **C.U. 9:** Interviene mediante comunicación de voz.
+  - **C.U. 10:** Interviene mediante solicitud de apertura de puerta.  
+  - **C.U. 11:** Registra incidentes.
+  - **C.U. 12:** Escalar alertas a móvil o policía.  
+  - **C.U. 13:** Consulta el historial de eventos de un determinado feed o ubicación.
 
 - **Administrador de WolfSys**  
-  - Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).  
-  - Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
-  - Da de alta o baja dispositivos (cámaras, lectores, tótems).  
-  - Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
+  - **C.U. 14:** Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).  
+  - **C.U. 15:** Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
+  - **C.U. 16:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
+  - **C.U. 17:** Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
 
 - **Administrador del Edificio**  
-  - Gestiona los usuarios residentes de su edificio.  
-  - Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  ???
-  - Revisa logs de eventos en su edificio. ???
+  - **C.U. 15.1:** Gestiona los usuarios residentes de su edificio.  
+  - **C.U. 18:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  ???
+  - **C.U. 19:** Revisa logs de eventos en su edificio. ???
 
 - **Personal Técnico de WolfSys**  
-  - Configura y gestiona equipos e instalaciones.  
+  - **C.U. 20:** Configura y gestiona equipos e instalaciones.  
 
 - **Dispositivo Edge (Controlador Local) ???**  
-  - Valida PINs y tags localmente cuando no hay conexión a internet.  
-  - Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
-  - Cambia a modo degradado si falla un componente central.
+  - **C.U. 21:** Valida PINs y tags localmente cuando no hay conexión a internet.  
+  - **C.U. 22:** Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
+  - **C.U. 23:** Cambia a modo degradado si falla un componente central.
 
 ### 5.2 Actores de Servicios (proveén un servicio al sistema)
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - Autentica cámaras y entrega streams de video a escala.  
-  - Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - Expone endpoints HTTP para listar y consumir feeds disponibles.
+  - **C.U. 24:** Autentica cámaras y entrega streams de video a escala.  
+  - **C.U. 25:** Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - **C.U. 26:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
 - **Módulos de Inteligencia Artificial / Scoring (futuros) ???**  
-  - Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
-  - Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
-  - Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
+  - **C.U. 27:** Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
+  - **C.U. 28:** Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
+  - **C.U. 29:** Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
 
 - **Infraestructura de Respaldo Eléctrico (UPS) ???**  
-  - Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía. 
+  - **C.U. 30:** Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía. 
 
 ## 6. Vista de Componentes de Alto Nivel
 1. **Módulo de Ingestión de Video (“Gateway de Video”)**  

@@ -111,16 +111,12 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 
 - **Administrador del Edificio**  
   - **C.U. 15.1:** Gestiona los usuarios residentes de su edificio.  
-  - **C.U. 18:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  ???
-  - **C.U. 19:** Revisa logs de eventos en su edificio. ???
+  - **C.U. 18:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
+  - **C.U. 19:** Revisa logs de eventos en su edificio. 
 
 - **Personal Técnico de WolfSys**  
-  - **C.U. 20:** Configura y gestiona equipos e instalaciones.  
+  - **C.U. 20:** Configura y gestiona equipos en instalaciones.  
 
-- **Dispositivo Edge (Controlador Local) ???**  
-  - **C.U. 21:** Valida PINs y tags localmente cuando no hay conexión a internet.  
-  - **C.U. 22:** Alerta y sincroniza estados (logs de acceso, incidentes) con el backend central cuando se restablece la conectividad.  
-  - **C.U. 23:** Cambia a modo degradado si falla un componente central.
 
 ### 5.2 Actores de Servicios (proveén un servicio al sistema)
 
@@ -129,13 +125,10 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 25:** Provee almacenamiento en caliente de hasta 3 meses de video.  
   - **C.U. 26:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
-- **Módulos de Inteligencia Artificial / Scoring (futuros) ???**  
+- **Módulos de Inteligencia Artificial / Scoring (futuros) - no es necesario incluirlo aun pero tener en cuenta que en un futuro se agrega**  
   - **C.U. 27:** Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
   - **C.U. 28:** Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
   - **C.U. 29:** Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
-
-- **Infraestructura de Respaldo Eléctrico (UPS) ???**  
-  - **C.U. 30:** Mantiene en funcionamiento componentes locales (Edge Controllers, lectores de tags) ante cortes de energía. 
 
 ## 6. Vista de Componentes de Alto Nivel
 1. **Módulo de Ingestión de Video (“Gateway de Video”)**  

@@ -85,7 +85,6 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
    - Estandarización de convenciones (nomenclatura de servicios, contratos de API, formatos de logs).
 
 ## 5. Actores Principales y sus Casos de Uso
-### 5.1 Actores de Consumo (el sistema les proveé servicios)
 - **Residente / Usuario Final**  
   - **C.U. 1:** Iniciar sesión en la aplicación móvil.
   - **C.U. 2:** Visualiza cámaras en vivo de su edificio desde la aplicación móvil.  

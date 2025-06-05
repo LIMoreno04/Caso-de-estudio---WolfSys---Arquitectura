@@ -95,7 +95,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 
 - **Agente de Vigilancia**  
   - **C.U. 6:** Inicia sesión en la aplicación web.
-  - **C.U. 7:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial).
+  - **C.U. 7:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial). Debe permitir la integración futura de módulos de scoring automáticos (módulos de IA o criterios adaptativos).
   - **C.U. 8:** Visualiza feeds de cámaras priorizados según sus criterios.  
   - **C.U. 9:** Interviene mediante comunicación de voz.
   - **C.U. 10:** Interviene mediante solicitud de apertura de puerta.  
@@ -117,18 +117,11 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 - **Personal Técnico de WolfSys**  
   - **C.U. 20:** Configura y gestiona equipos en instalaciones.  
 
-
-### 5.2 Actores de Servicios (proveén un servicio al sistema)
-
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - **C.U. 24:** Autentica cámaras y entrega streams de video a escala.  
-  - **C.U. 25:** Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - **C.U. 26:** Expone endpoints HTTP para listar y consumir feeds disponibles.
+  - **C.U. 21:** Autentica cámaras y entrega streams de video a escala.  
+  - **C.U. 22:** Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - **C.U. 23:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
-- **Módulos de Inteligencia Artificial / Scoring (futuros) - no es necesario incluirlo aun pero tener en cuenta que en un futuro se agrega**  
-  - **C.U. 27:** Procesan feeds de video para detectar movimiento, presencia humana o reconocimiento facial.  
-  - **C.U. 28:** Generan puntajes (scores) dinámicos para priorizar cámaras en la consola de vigilancia.  
-  - **C.U. 29:** Aprenden del comportamiento operativo de cada edificio para ajustar reglas de scoring.
 
 ## 6. Vista de Componentes de Alto Nivel
 1. **Módulo de Ingestión de Video (“Gateway de Video”)**  

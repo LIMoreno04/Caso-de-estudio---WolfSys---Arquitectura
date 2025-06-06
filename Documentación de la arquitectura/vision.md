@@ -108,7 +108,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 - **Administrador de WolfSys**  
   - **C.U. 17:** Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).
   - **C.U. 18:** Consulta información de las propiedades.
-  - **C.U. 19:** Crea, modifica y asigna roles a residentes, personal de servicio y agentes.
+  - **C.U. 19:** Gestiona usuarios, y asigna roles de residentes, personal de servicio o agentes.
   - **C.U. 20:** Consulta información de los distintos usuarios.
   - **C.U. 21:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
   - **C.U. 22:** Revisa logs de auditoría.

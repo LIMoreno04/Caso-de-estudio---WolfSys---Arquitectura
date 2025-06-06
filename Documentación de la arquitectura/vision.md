@@ -91,7 +91,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 3:** :Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
   - **C.U. 4:** Genera accesos temporales (PIN o enlace) para visitas.  
   - **C.U. 5:** Ejecuta apertura remota o en sitio de puerta o barrera.
-  - **C.U. 6:** Visualizar grabaciones históricas de su edificio.
+  - **C.U. 6:** Visualizar grabaciones históricas de su edificio desde la aplicación móvil.
 
 - **Agente de Vigilancia**  
   - **C.U. 7:** Inicia sesión en la aplicación web.
@@ -111,22 +111,22 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 19:** Crea, modifica y asigna roles a residentes, personal de servicio y agentes.
   - **C.U. 20:** Consulta información de los distintos usuarios.
   - **C.U. 21:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
-  - **C.U. 22:** Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
+  - **C.U. 22:** Revisa logs de auditoría.
 
 - **Administrador del Edificio**  
   - **C.U. 23:** Gestiona los usuarios residentes de su edificio.
   - **C.U. 24:** Consulta información de los residentes de su edificio.
   - **C.U. 25:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
   - **C.U. 26:** Revisa logs de eventos en su edificio.
-  - **C.U. 6:** Visualizar grabaciones históricas de su edificio.
+  - **C.U. 27:** Visualizar grabaciones históricas de su edificio desde la interfaz administrativa.
 
 - **Personal Técnico de WolfSys**  
-  - **C.U. 27:** Configura y gestiona equipos en instalaciones.  
+  - **C.U. 28:** Configura y gestiona equipos en instalaciones.  
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - **C.U. 28:** Autentica cámaras y entrega streams de video a escala.  
-  - **C.U. 29:** Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - **C.U. 30:** Expone endpoints HTTP para listar y consumir feeds disponibles.
+  - **C.U. 29:** Autentica cámaras y entrega streams de video a escala.  
+  - **C.U. 30:** Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - **C.U. 31:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
 
 ## 6. Vista de Componentes de Alto Nivel

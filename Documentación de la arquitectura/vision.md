@@ -125,9 +125,8 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
   - **C.U. 29:** Autentica cámaras.
-  - **C.U. 30:** Entrega streams de video.  
+  - **C.U. 30:** Expone endpoints HTTP para listar y consumir streams disponibles.  
   - **C.U. 31:** Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - **C.U. 32:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
 
 ## 6. Vista de Componentes de Alto Nivel

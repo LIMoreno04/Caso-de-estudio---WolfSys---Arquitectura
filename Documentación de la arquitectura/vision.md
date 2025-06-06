@@ -91,35 +91,42 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 3:** :Recibe notificaciones push ante intentos de ingreso o llamadas desde el portero virtual.  
   - **C.U. 4:** Genera accesos temporales (PIN o enlace) para visitas.  
   - **C.U. 5:** Ejecuta apertura remota o en sitio de puerta o barrera.
+  - **C.U. 6:** Visualizar grabaciones históricas de su edificio.
 
 - **Agente de Vigilancia**  
-  - **C.U. 6:** Inicia sesión en la aplicación web.
-  - **C.U. 7:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial). Debe permitir la integración futura de módulos de scoring automáticos (módulos de IA o criterios adaptativos).
-  - **C.U. 8:** Visualiza feeds de cámaras priorizados según sus criterios.  
-  - **C.U. 9:** Interviene mediante comunicación de voz.
-  - **C.U. 10:** Interviene mediante solicitud de apertura de puerta.  
-  - **C.U. 11:** Registra incidentes.
-  - **C.U. 12:** Escalar alertas a móvil o policía.  
-  - **C.U. 13:** Consulta el historial de eventos de un determinado feed o ubicación.
+  - **C.U. 7:** Inicia sesión en la aplicación web.
+  - **C.U. 8:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial). Debe permitir la integración futura de módulos de scoring automáticos (módulos de IA o criterios adaptativos).
+  - **C.U. 9:** Visualiza feeds de cámaras priorizados según sus criterios.  
+  - **C.U. 10:** Interviene mediante comunicación de voz.
+  - **C.U. 11:** Interviene mediante solicitud de apertura de puerta.  
+  - **C.U. 12:** Registra incidentes.
+  - **C.U. 13:** Escalar alertas a móvil o policía.  
+  - **C.U. 14:** Consulta el historial de eventos de un determinado feed o ubicación.
+  - **C.U. 15:** Visualiza grabaciones históricas.
+  - **C.U. 16:** Consulta información de las instalaciones que vigila.
 
 - **Administrador de WolfSys**  
-  - **C.U. 14:** Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).  
-  - **C.U. 15:** Crea, modifica y asigna roles a residentes, personal de servicio y agentes.  
-  - **C.U. 16:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
-  - **C.U. 17:** Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
+  - **C.U. 17:** Gestiona propiedades y configuraciones de servicios contratados, permitiendo configuraciones predefinidas (torre, complejo, torre ejecutiva).
+  - **C.U. 18:** Consulta información de las propiedades.
+  - **C.U. 19:** Crea, modifica y asigna roles a residentes, personal de servicio y agentes.
+  - **C.U. 20:** Consulta información de los distintos usuarios.
+  - **C.U. 21:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
+  - **C.U. 22:** Revisa logs de auditoría y configuraciones sensibles (políticas de acceso, scoring inicial).
 
 - **Administrador del Edificio**  
-  - **C.U. 15.1:** Gestiona los usuarios residentes de su edificio.  
-  - **C.U. 18:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
-  - **C.U. 19:** Revisa logs de eventos en su edificio. 
+  - **C.U. 23:** Gestiona los usuarios residentes de su edificio.
+  - **C.U. 24:** Consulta información de los residentes de su edificio.
+  - **C.U. 25:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
+  - **C.U. 26:** Revisa logs de eventos en su edificio.
+  - **C.U. 6:** Visualizar grabaciones históricas de su edificio.
 
 - **Personal Técnico de WolfSys**  
-  - **C.U. 20:** Configura y gestiona equipos en instalaciones.  
+  - **C.U. 27:** Configura y gestiona equipos en instalaciones.  
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - **C.U. 21:** Autentica cámaras y entrega streams de video a escala.  
-  - **C.U. 22:** Provee almacenamiento en caliente de hasta 3 meses de video.  
-  - **C.U. 23:** Expone endpoints HTTP para listar y consumir feeds disponibles.
+  - **C.U. 28:** Autentica cámaras y entrega streams de video a escala.  
+  - **C.U. 29:** Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - **C.U. 30:** Expone endpoints HTTP para listar y consumir feeds disponibles.
 
 
 ## 6. Vista de Componentes de Alto Nivel

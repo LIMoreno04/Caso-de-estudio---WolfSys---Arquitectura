@@ -112,21 +112,24 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 20:** Consulta información de los distintos usuarios.
   - **C.U. 21:** Da de alta o baja dispositivos (cámaras, lectores, tótems).  
   - **C.U. 22:** Revisa logs de auditoría.
+  - **C.U. 23:** Iniciar sesión en la interfaz administrativa.
 
 - **Administrador del Edificio**  
-  - **C.U. 23:** Gestiona los usuarios residentes de su edificio.
-  - **C.U. 24:** Consulta información de los residentes de su edificio.
-  - **C.U. 25:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
-  - **C.U. 26:** Revisa logs de eventos en su edificio.
-  - **C.U. 27:** Visualizar grabaciones históricas de su edificio desde la interfaz administrativa.
+  - **C.U. 23:** Iniciar sesión en la interfaz administrativa.
+  - **C.U. 24:** Gestiona los usuarios residentes de su edificio.
+  - **C.U. 25:** Consulta información de los residentes de su edificio.
+  - **C.U. 26:** Da de alta o baja dispositivos (cámaras, lectores, tótems) en su edificio.  
+  - **C.U. 27:** Revisa logs de eventos en su edificio.
+  - **C.U. 28:** Visualizar grabaciones históricas de su edificio desde la interfaz administrativa.
 
-- **Personal Técnico de WolfSys**  
-  - **C.U. 28:** Configura y gestiona equipos en instalaciones.  
+- **Personal Técnico de WolfSys**
+  - **C.U. 23:** Iniciar sesión en la interfaz administrativa.
+  - **C.U. 29:** Configura y gestiona equipos en instalaciones.  
 
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - **C.U. 29:** Autentica cámaras.
-  - **C.U. 30:** Expone endpoints HTTP para listar y consumir streams disponibles.  
-  - **C.U. 31:** Provee almacenamiento en caliente de hasta 3 meses de video.  
+  - **C.U. 30:** Autentica cámaras.
+  - **C.U. 31:** Expone endpoints HTTP para listar y consumir streams disponibles.  
+  - **C.U. 32:** Almacena las grabaciones, hasta 3 meses en caliente y luego en frío.  
 
 
 ## 6. Vista de Componentes de Alto Nivel

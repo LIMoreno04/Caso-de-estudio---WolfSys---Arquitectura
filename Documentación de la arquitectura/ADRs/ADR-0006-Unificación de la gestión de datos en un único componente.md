@@ -1,4 +1,4 @@
-# ADR-0006: Unificación de la gestión de datos en un único componente CRM
+# ADR-0006: Unificación de la gestión de datos en un único componente
 
 ## ID
 

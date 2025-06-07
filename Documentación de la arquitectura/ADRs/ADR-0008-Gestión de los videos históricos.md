@@ -1,4 +1,4 @@
-# ADR-008: El componente Tumimeras se encarga de gestionar el almacenamiento de los videos históricos.
+# ADR-008: El componente Tumimeras se encarga de gestionar el almacenamiento de los videos recientes.
 
 ## ID
 0008

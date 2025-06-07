@@ -7,7 +7,7 @@
 Gestión de los videos históricos.
 
 ## Fecha
-[DD/MM/AAAA]
+07/06/2025
 
 ## Estado
 Tomada 

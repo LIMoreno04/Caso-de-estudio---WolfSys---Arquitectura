@@ -98,7 +98,7 @@ Diseñar una arquitectura modular, escalable y resiliente para la plataforma de 
   - **C.U. 8:** Asigna un cierto valor o criterio de prioridad a cada una de sus cámaras (scoring manual inicial). Los criterios pueden ser estáticos (ubicación, tipo de acceso) o dinámicos (detección de movimiento, reconocimiento facial). Debe permitir la integración futura de módulos de scoring automáticos (módulos de IA o criterios adaptativos).
   - **C.U. 9:** Visualiza feeds de cámaras priorizados según sus criterios.  
   - **C.U. 10:** Interviene mediante comunicación de voz.
-  - **C.U. 11:** Interviene mediante solicitud de apertura de puerta.  
+  - **C.U. 11:** Interviene mediante apertura de puerta.  
   - **C.U. 12:** Registra incidentes.
   - **C.U. 13:** Escalar alertas a móvil o policía.  
   - **C.U. 14:** Consulta el historial de eventos de un determinado feed o ubicación.

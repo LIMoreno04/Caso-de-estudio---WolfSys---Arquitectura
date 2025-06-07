@@ -6,8 +6,7 @@
 
 ## Título
 
-Unificación de la gestión de datos en un único componente CRM
-
+Unificación de la gestión de datos en un único componente Gestor de identidades.
 ## Fecha
 
 06/06/2025
@@ -24,7 +23,7 @@ Sin embargo, estos datos están fuertemente relacionados: un residente está asi
 
 ## Decisión tomada
 
-Se decide unificar la gestión de estos datos en un único componente: el **CRM del sistema**, que será responsable de la administración de usuarios, dispositivos y edificios de forma centralizada.
+Se decide unificar la gestión de estos datos en un único componente: el **Gestor de identidades**, que será responsable de la administración de usuarios, dispositivos y edificios de forma centralizada.
 
 ## Factores decisivos
 
@@ -36,7 +35,7 @@ Se decide unificar la gestión de estos datos en un único componente: el **CRM 
 ## Alternativas
 
 - **Separar la gestión por dominio (usuarios, edificios, dispositivos, etc.):** genera múltiples servicios interconectados con relaciones cruzadas complejas.
-- **Unificar en un único componente CRM (opción elegida):** reduce la complejidad de integración y evita problemas de sincronización.
+- **Unificar en un único componente (opción elegida):** reduce la complejidad de integración y evita problemas de sincronización.
 
 ## Pros y Contras de la decisión tomada
 
@@ -53,4 +52,4 @@ Se decide unificar la gestión de estos datos en un único componente: el **CRM 
 
 ## Consecuencias
 
-El CRM será el componente central que administra usuarios, dispositivos y edificios. A futuro, si el sistema crece significativamente, podría considerarse desacoplar algunas funcionalidades, pero partiendo desde una base unificada se garantiza consistencia y menor complejidad inicial.
+El Gestor de identidades será el componente central que administra usuarios, dispositivos y edificios. A futuro, si el sistema crece significativamente, podría considerarse desacoplar algunas funcionalidades, pero partiendo desde una base unificada se garantiza consistencia y menor complejidad inicial.

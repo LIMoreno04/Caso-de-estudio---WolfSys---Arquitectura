@@ -36,7 +36,7 @@ los videos históricos. Sus responsabilidades incluyen:
 - Tumimeras gestiona todo el ciclo de vida, incluyendo el archivado: Rechazada para evitar acoplar responsabilidades múltiples en un solo componente y mantener simple su diseño.
 - Usar un sistema de archivos o almacenamiento externo directamente: Considerado, pero se prefirió una solución integrada al ecosistema actual del sistema, con control del formato y proceso de migración.
 
-## Pros y Contras de que La heladera maneje el almacenamiento en frío.
+## Pros y Contras
 
 **Pros:**
 - Separación clara de responsabilidades: Tumimeras se enfoca en el acceso reciente, 
@@ -57,5 +57,3 @@ al migrar contenidos antiguos.
 - Escalabilidad del sistema: se facilita el crecimiento del sistema sin comprometer la eficiencia del almacenamiento en caliente.
 - Modularidad: separar la lógica de archivado en un componente dedicado (La Heladera) permite mantener y evolucionar cada parte del sistema de forma independiente.
   
-## Comentarios (opcional)
-[Cualquier detalle adicional o nota.]

@@ -8,7 +8,7 @@
 Gestión del almacenamiento en frío mediante el componente "La Heladera"
 
 ## Fecha
-[DD/MM/AAAA]
+07/06/2025
 
 ## Estado
 Tomada 

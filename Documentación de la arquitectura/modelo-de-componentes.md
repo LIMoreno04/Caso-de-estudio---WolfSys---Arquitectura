@@ -1,5 +1,7 @@
 # Modelo de componentes
-Se optó por una arquitectura en capas, las cuales en su mayoría obedecen el patrón de capas, con la excepción de una única interacción que se da de "capa 2" a "capa 5". Por lo tanto, nuestra solución sigue un patrón Multi-Tier. Adicionalmente, nuestra "capa 4", la capa de negocio, fue implementada siguiendo un patrón de microservicios con 3 servicios principales: Consulta de videos, CRM, y peticiones de interacción.
+En este documento se plantea el modelo de componentes elegido, mencionando y explicando brevemente el funcionamiento de todos los componentes que lo conforman, así como las interfaces que ofrecen y como se relacionan.
+
+Se optó por una arquitectura en capas consistente de 6 capas, las cuales en general solo interactúan con sus capas adyacentes, con la excepción de una única interacción que se da de "capa 2" a "capa 5". Por lo tanto, nuestra solución no es exactamente en capas, si no que sigue un patrón Multi-Tier. Adicionalmente, nuestra "capa 4", la capa de negocio, fue implementada siguiendo un patrón de microservicios con 3 servicios principales: Consulta de videos, CRM, y peticiones de interacción.
 
 ---
 
@@ -185,68 +187,84 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 
 ### **Gateway del edificio**
 - **Qué hace**:  
-  - Nodo local de resiliencia: en modo degradado sigue validando accesos sin CRM.  
-  - Sincroniza logs y estados cuando recobra conectividad.  
+  - Componente local al edificio encargado de recibir y enrutar (dentro del edificio) las peticiones de interacción.
+    - Si se recibe una petición de apertura de puerta remota la enruta hacia el Edge Controller.
+    - Si se recibe una señal de audio a transmitir la enruta hacia el dispositivo correspondiente.
+  - Si hay conexión y alguien intenta acceder se encarga de consultar todas las formas posibles de control de acceso cuando haga falta, a través de `ConsistenciaProvider`.
+    - El Edge Controller debe pedirle al Gateway los datos de acceso válidos en intervalos periódicos (a través de `ConsistenciaLocal`).
+  - Registra todos los accesos e interacciones a través de `Log`.
+  - Si hay una perdida de conexión, cuando esta vuelva se encarga de sincronizar logs y estados de la información de control de acceso.  
 - **Interfaces usadas**  
-  - `ComunicaciónInstalación` (desde Gestor de Control)  
+  - `Log`
+  - `ConsistenciaProvider`
+  - `AccessControl`
+  - `ReproductorDeMensaje`
 - **Interfaces ofrecidas**  
-  - `AccessControl` (a Edge Controllers)  
-  - `ConsistenciaProvider` (sincronización con CRM)  
+  - `ComunicaciónInstalación`
   - `ConsistenciaLocal` (acceso local de emergencia)
 
 ---
 
-## 🟣 Capa de Control de Datos
-
 ### **Edge Controller**
-- **Qué hace**:  
-  - Ejecuta validación local (tags, PINs, biometría) usando DB local.  
-  - Reproduce mensajes de voz (portero remoto).  
-  - Sincroniza eventos y llaves con el Gateway.  
+- Ejecuta apertura remota de puertas al recibir la petición desde `AccessControl`.
+- Ejecuta validación local de métodos de apertura de puertas (tags, PINs, biometría).
+  - Sólo permite usar métodos que considere "válidos" en ese momento.
+- Sincroniza eventos e información de acceso con el Gateway.
+  - En intervalos regulares, le pide al Gateway su información de acceso válida más reciente.
+- En caso de que no haya conectividad pasa a modo degradado: deja de considerar como válidos todos los métodos de acceso digitales, y solo permite el uso de tags que validará usando la base de datos local (que solo tiene la información de las tags).
+  - Al volver la conectividad le pide al Gateway nuevamente los otros datos de acceso válidos, y en caso de que información sobre las tags haya cambiado, actualiza la base de datos.
 - **Interfaces usadas**  
-  - `AccessControl` (desde Gateway del edificio)  
-  - `DBProvider` (acceso a DB local de tags)  
+  - `ConsistenciaLocal` 
+  - `DBProvider` (DB local de tags)  
 - **Interfaces ofrecidas**  
-  - (ninguna externa; retorna respuestas de validación al Gateway)
+  - `AccessControl`
+---
+## Capa de Control de Datos
+
+### **La Heladera**
+- Se encarga de tomar todos los videos que tengan más de 3 meses almacenados en el almacenamiento interno de Tumimeras (en caliente), archivarlos y enviarlos a la base de datos histórica de videos para ser almacenados en frío.
+  - Cada noche realiza la transferencia de los videos que durante ese día cumplieron los 3 meses.
+  - "Enfría" los videos almacenados.
+- **Interfaces usadas**  
+  - `OlderVideosProvider` 
+
 ---
 
 ### **Recolector de videos fríos**
-- **Qué hace**: Extrae automáticamente grabaciones >3 meses de “Tumimeras” para archivado.
-- **Interfaces usadas**  
-  - `OlderVideosProvider` (desde Tumimeras)  
+- Intermediario entre Consultor de videos y la DB histórica de videos.
+  -  Entrega los videos aún archivados.
 - **Interfaces ofrecidas**  
-  - `DBProvider` (inserta en DB histórica de videos)
+  - `DBProvider` (DB histórica de videos, solo lectura)
 
 ---
 
-### **La Heladera**
-- **Qué hace**: Microservicio de consulta de archivo histórico de videos.
-- **Interfaces usadas**  
-  - `DBProvider` (acceso a DB histórica)  
+### **Persistencia datos e información general**
+- Intermediario entre el sistema y la DB general.
+  -  Interactúa principalmente con el CRM, pero también con el modelo de scoring y el componente de autenticación y autorización.
 - **Interfaces ofrecidas**  
-  - `StreamProvider` (a Consultor de videos)
+  - `DBProvider` (DB general)
 
 ---
 
+### **Persistencia local de tags**
+- Intermediario entre los Edge Controllers y las DBs locales.
+- **Interfaces ofrecidas**  
+  - `DBProvider` (DB local de tags)
 
-## 🟨 Capa de Datos
+---
+
+## Capa de Datos
 
 ### **DB general**
-- Guarda entidades maestras y logs transaccionales del CRM y microservicios.
+- Guarda entidades de todo tipo (edificios, usuarios, dispositivos), logs de interacciones del sistema, logs de eventos (incidentes, accesos, apertura de puertas, etc), toda la información válida de acceso para cada puerta, y datos de autenticación de los usuarios (identificador y contraseña).
 
 ### **DB histórica de videos**
-- Archivo frío de streams (>3 meses).
+- Archivado en frío de grabaciones de hace más de 3 meses.
 
 ### **DB local de tags**
-- Persistencia de credenciales (RFID, PIN…) para operación en modo degradado.
+- Persistencia de credenciales (solo tag RFID) para operación de las puertas en modo degradado.
 
 ---
-
-> **En conjunto**, este diseño cumple los objetivos de modularidad, escalabilidad y resiliencia:  
-> - **Separación clara de responsabilidades** (streaming, scoring, CRM, control de acceso).  
-> - **Borde inteligente** (B.O.B. y Gateways) para alta disponibilidad y degradación local.  
-> - **Interfaces bien definidas** para facilitar futuras integraciones (IA de video, nuevos métodos de acceso).  
-> - **Auditoría y logs inmutables** distribuidos en toda la arquitectura.  
 
 
 ---

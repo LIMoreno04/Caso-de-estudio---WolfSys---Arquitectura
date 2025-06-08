@@ -186,14 +186,13 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ---
 
 ### **Gateway del edificio**
-- **Qué hace**:  
-  - Componente local al edificio encargado de recibir y enrutar (dentro del edificio) las peticiones de interacción.
-    - Si se recibe una petición de apertura de puerta remota la enruta hacia el Edge Controller.
-    - Si se recibe una señal de audio a transmitir la enruta hacia el dispositivo correspondiente.
-  - Si hay conexión y alguien intenta acceder se encarga de consultar todas las formas posibles de control de acceso cuando haga falta, a través de `ConsistenciaProvider`.
-    - El Edge Controller debe pedirle al Gateway los datos de acceso válidos en intervalos periódicos (a través de `ConsistenciaLocal`).
-  - Registra todos los accesos e interacciones a través de `Log`.
-  - Si hay una perdida de conexión, cuando esta vuelva se encarga de sincronizar logs y estados de la información de control de acceso.  
+ - Componente local al edificio encargado de recibir y enrutar (dentro del edificio) las peticiones de interacción.
+   - Si se recibe una petición de apertura de puerta remota la enruta hacia el Edge Controller.
+   - Si se recibe una señal de audio a transmitir la enruta hacia el dispositivo correspondiente.
+ - Si hay conexión y alguien intenta acceder se encarga de consultar todas las formas posibles de control de acceso cuando haga falta, a través de `ConsistenciaProvider`.
+   - El Edge Controller debe pedirle al Gateway los datos de acceso válidos en intervalos periódicos (a través de `ConsistenciaLocal`).
+ - Registra todos los accesos e interacciones a través de `Log`.
+ - Si hay una perdida de conexión, cuando esta vuelva se encarga de sincronizar logs y estados de la información de control de acceso.  
 - **Interfaces usadas**  
   - `Log`
   - `ConsistenciaProvider`
@@ -223,6 +222,7 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 
 ### **La Heladera**
 - Se encarga de tomar todos los videos que tengan más de 3 meses almacenados en el almacenamiento interno de Tumimeras (en caliente), archivarlos y enviarlos a la base de datos histórica de videos para ser almacenados en frío.
+  - A cada video también se le asocia su fecha de grabación y un identificador de su cámara para no perder la información de donde fue grabado.
   - Cada noche realiza la transferencia de los videos que durante ese día cumplieron los 3 meses.
   - "Enfría" los videos almacenados.
 - **Interfaces usadas**  

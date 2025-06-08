@@ -47,7 +47,7 @@
 
 ---
 ## Diagrama de contexto:
-![Diagramas/Exportados/Diagrama-de-contexto.png](Diagrama de contexto.png)
+![Diagrama de contexto.png](Diagramas/Exportados/Diagrama-de-contexto.png)
 
 ## Diagrama de casos de uso:
-![Diagramas/Exportados/Diagrama-de-casos-de-uso.png](Diagrama de casos de uso.png)
+![Diagrama de casos de uso.png](Diagramas/Exportados/Diagrama-de-casos-de-uso.png)

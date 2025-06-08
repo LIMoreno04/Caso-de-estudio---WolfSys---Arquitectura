@@ -1,5 +1,5 @@
 # Visión de la Arquitectura de WolfSys
-Este documento constituye nuestra “visión” de la arquitectura de WolfSys para su sistema de portería virtual, definiendo los actores, casos de uso, requerimientos funcionales y no funcionales, así como el contexto de despliegue y las líneas de evolución futura. Referirse a los ADRs y diagramas asociados para detalles específicos del diseño de cada aspecto.
+Este documento constituye nuestra “visión” de la arquitectura de WolfSys para su sistema de portería virtual, definiendo el alcance, requerimientos funcionales y no funcionales. Para más detalles de una vista específica referirse a [Actores y Casos de uso](casos-de-uso.md), [Modelo de componentes](modelo-de-componentes.md), [Despliegue](despliegue.md) o los ADRs y diagramas asociados.
 
 ## 1. Objetivo General
 Diseñar una arquitectura modular, escalable y resiliente para la plataforma de portería virtual de WolfSys, de modo que permita:

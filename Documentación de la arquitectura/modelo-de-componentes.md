@@ -26,7 +26,7 @@ Se optó por una arquitectura en capas, las cuales en su mayoría obedecen el pa
 - Punto de entrada unificado para todos los frontends.
   - Dirige las credenciales del usuario hacia el componente de autenticación y autorización para validar la sesión.
   - Recibe un token (a través de la interfaz ´IdAuth´) con las credenciales del usuario y su nivel de permisos (y un tiempo de expiración de la sesión).
-  - Estudia los permisos del usuario y, si corresponde, enruta sus llamadas y peticiones a las APIs adecuadas para el caso (de video, de datos o de peticiones).
+  - Estudia los permisos del usuario y, si corresponde, enruta sus llamadas y peticiones a las APIs adecuadas para el caso (de video, de datos o de interacciones).
   - Con cada llamada y petición que redirige hacia el sistema también envía el token (que recibe de `IdAuth`). De esta manera los servicios de más abajo tendrán una forma fácil y rápida de conocer los permisos del usuario sin necesidad de realizar todo el proceso de autenticación nuevamente.
 - **Interfaces usadas**  
   - `IdAuth` (desde módulo de Autenticación)  
@@ -63,6 +63,7 @@ Se optó por una arquitectura en capas, las cuales en su mayoría obedecen el pa
 
 ### **API Datos**
 - Recibe y redirecciona peticiones CRUD para toda la información básica del sistema (edificios, residentes, roles, etc) hacia el CRM.
+  - Esto incluye la información de control de acceso, como pueden ser registros biométricos (registro de las caras para reconocimiento facial o huellas dactilares), PINs permanentes o temporales, tags reconocidos, etc.).
 - Puede enviar una notificación push a un residente puntual si recibe la orden.
   - Debe recibir los datos del usuario residente al cual le enviará la notificación.
 - **Interfaces usadas**  
@@ -72,7 +73,7 @@ Se optó por una arquitectura en capas, las cuales en su mayoría obedecen el pa
 
 ---
 
-### **API Peticiones**
+### **API Interacciones**
 - **Qué hace**: Recibe las peticiones de apertura remota, control de acceso, e interacciones directas con las instalaciones, como comunicación por voz.
 - **Interfaces usadas**  
   - `AccessControlAPI`
@@ -141,14 +142,32 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
  
 ---
 
-### **Gestor de entidades**
+### **Gestión de entidades**
  - Componente centralizado para CRUD de dispositivos, edificios y usuarios en la base de datos general.
  - Si se modifica algo de un edificio, automáticamente se encarga de modificar la información de todos los usuarios residentes afectados también.
  - Registra todas las peticiones que recibe y efectúa.
  - **Interfaces usadas**
-   - 
+   - `Log`
+   - `DBProvider` (DB general)
  - **Interfaces ofrecidas**
-   -  
+   -  `CRUDcrm`
+  
+---
+
+### Gestor de información para control de acceso
+ - Se encarga de operaciones CRUD referentes a las credenciales y métodos de acceso al edificio.
+   - Es el encargado de generar los PINs temporales para visitas.
+ - Cada ciertos intervalos le envía la información de control de acceso relevante a los edge controllers de cada edificio (a través de su respectivo Gateway, con una interfaz `ConsistenciaProvider`).
+ - **Interfaces usadas**
+   - `DBProvider` (DB general)
+   - `Log`
+ - **Interfaces ofrecidas**
+   -  `CRUDcrm`
+   -  n `ConsistenciaProvider`s
+
+---
+
+## Servicio de interacciones
 
 ### **Gestor del control de acceso**
 - **Qué hace**: Lógica central de autorización multifactor (RFID, PIN, biometría, intervención).  

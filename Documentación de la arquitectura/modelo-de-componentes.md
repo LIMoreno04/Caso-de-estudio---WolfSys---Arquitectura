@@ -170,12 +170,16 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ## Servicio de interacciones
 
 ### **Gestor del control de acceso**
-- **Qué hace**: Lógica central de autorización multifactor (RFID, PIN, biometría, intervención).  
+- En los servidores de WolfSys.
+- Se encarga de redirigir las peticiones o llamadas al edificio correspondiente para ser ejecutadas.
+  - Según el tipo de petición deberá formular una estrategia de envío diferente (no es lo mismo enviar una señal de activación para abrir una puerta que una señal de audio para la comunicación de voz del agente).
+  - Tiene endpoints para cada tipo de datos que puede enviar. Los expone en `AccessControlAPI` y es trabajo de la API de interacciones enrutar cada tipo de petición hacia su endpoint correspondiente.
+- Registra todas las peticiones que pasan por él (a través de `Log`).
 - **Interfaces usadas**  
-  - `AccessControlAPI` (desde API Peticiones)  
+  - n `ComunicaciónInstalación`(e)s
+  - `Log`
 - **Interfaces ofrecidas**  
-  - `AccessControlAPI` (a CRM y API Peticiones)  
-  - `ComunicaciónInstalación` (comunica comandos al Gateway del edificio)
+  - `AccessControlAPI`
 
 ---
 

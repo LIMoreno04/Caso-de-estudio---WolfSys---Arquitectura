@@ -118,16 +118,37 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ### **Registro de incidentes**
 - Solo para los usuarios de la aplicación web (agentes de vigilancia).
 - Incluye una serie de incidentes prototípicos (intento de entrada forzosa, vandalismo, etc) para que el usuario seleccione o introduzca una descripción personalizada.
-- Al recibir la orden (a través de `CRUDcrm`) registra el tipo de incidente, la fecha y hora en la que ocurrió, y el o los usuarios afectados.
+- Al recibir la orden (a través de `CRUDcrm`) registra el tipo de incidente, la fecha y hora en la que ocurrió, el o los usuarios afectados, y el agente que lo registró.
   - Si la petición lo indica, tiene la opción de enviar una notificación push a todos los usuarios afectados.
   - Si la petición lo indica, tiene la opción de alertar a las autoridades. Por la sensibilidad de la situación en este caso, el proceso se realiza internamente en el mismo componente, de forma que se eviten posibles retrasos por latencia o sobrecarga de otras partes del sistema.
 - **Interfaces usadas**
   - `NotificarResidente`
   - `Log`
 - **Interfaces ofrecidas**
-  - CRUDcrm
+  - `CRUDcrm`
 
 ---
+
+### **Auditoría e Historial**
+- Se encarga de registrar todos los eventos e interacciones con el sistema en la base de datos general.
+- Permite el acceso y visualización a dichos registros, si el usuario tiene los permisos apropiados. Bajo ninguna circunstancia permite su modificación.
+  - También registra estos accesos.
+- **Interfaces usadas**
+  - `DBProvider` (DB general)
+- **Interfaces ofrecidas**
+  - `Log`
+  - `CRUDcrm` (solo Read)
+ 
+---
+
+### **Gestor de entidades**
+ - Componente centralizado para CRUD de dispositivos, edificios y usuarios en la base de datos general.
+ - Si se modifica algo de un edificio, automáticamente se encarga de modificar la información de todos los usuarios residentes afectados también.
+ - Registra todas las peticiones que recibe y efectúa.
+ - **Interfaces usadas**
+   - 
+ - **Interfaces ofrecidas**
+   -  
 
 ### **Gestor del control de acceso**
 - **Qué hace**: Lógica central de autorización multifactor (RFID, PIN, biometría, intervención).  

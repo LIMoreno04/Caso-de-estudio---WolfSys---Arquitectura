@@ -1,6 +1,6 @@
 # Modelo de Despliegue
 
-Este documento describe el modelo de componentes para el sistema WolfSys, explicando el propósito y funcionamiento de cada uno, así como las interfaces que ofrecen y las relaciones entre ellos. El sistema sigue una arquitectura distribuida en 6 capas principales: presentación, borde, servicios de aplicación, servicios de negocio, persistencia de datos e infraestructura local.
+Este documento describe el modelo de despliegue para el sistema WolfSys, explicando el propósito y funcionamiento de cada uno, así como las interfaces que ofrecen y las relaciones entre ellos. El sistema sigue una arquitectura distribuida en 6 capas principales: presentación, borde, servicios de aplicación, servicios de negocio, persistencia de datos e infraestructura local.
 
 ---
 

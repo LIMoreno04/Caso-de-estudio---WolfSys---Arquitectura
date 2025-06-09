@@ -89,13 +89,13 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 
 ### **Consultor de videos**
 - Abstrae a las capas superiores del hecho de que existen dos almacenamientos diferentes de videos históricos.
-  - Si recibe una petición de un video con más de 3 meses de antigüedad lo va a buscar a la DB histórica a través de ´DBProvider´, se encarga de desarchivarlo y enviarlo como video hacia la API.
-  - Si recibe una petición de un video de menos de 3 meses de antigüedad lo recibe casi instantáneamente de Tumimeras y lo envía hacia la API. 
+  - Si recibe una petición de un video con más de 3 meses de antigüedad lo va a buscar a la DB histórica a través de ´DBProvider´ (proporcionando la fecha, hora, y cámara de origen del video buscado). El consultor se encarga de desarchivarlo y enviarlo hacia la API.
+  - Si recibe una petición de un video con menos de 3 meses de antigüedad lo recibe casi instantáneamente de Tumimeras y lo envía hacia la API. 
 - Puede llamar a el modelo de scoring para proveer los videos en un ordenamiento particular, si corresponde.
 - Registra todas las peticiones que recibe a través de ´Log´.  
 - **Interfaces usadas**  
   - `NewerVideosProvider`  
-  - `DBProvider` (DB histórica de videos)
+  - `DBProvider` (DB de videos)
   - `Log`
   - `VideoScorer`  
 - **Interfaces ofrecidas**  
@@ -205,6 +205,8 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ---
 
 ### **Edge Controller**
+- Dispositivo conectado a todas las puertas y barreras que deban ser controladas por el sistema.
+  - Las controla a través de la interfaz `Abridor`.
 - Ejecuta apertura remota de puertas al recibir la petición desde `AccessControl`.
 - Ejecuta validación local de métodos de apertura de puertas (tags, PINs, biometría).
   - Sólo permite usar métodos que considere "válidos" en ese momento.
@@ -212,29 +214,34 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
   - En intervalos regulares, le pide al Gateway su información de acceso válida más reciente.
 - En caso de que no haya conectividad pasa a modo degradado: deja de considerar como válidos todos los métodos de acceso digitales, y solo permite el uso de tags que validará usando la base de datos local (que solo tiene la información de las tags).
   - Al volver la conectividad le pide al Gateway nuevamente los otros datos de acceso válidos, y en caso de que información sobre las tags haya cambiado, actualiza la base de datos.
-- **Interfaces usadas**  
+- **Interfaces usadas**
+  - `Abridor`
   - `ConsistenciaLocal` 
   - `DBProvider` (DB local de tags)  
 - **Interfaces ofrecidas**  
   - `AccessControl`
+
 ---
+
 ## Capa de Control de Datos
 
 ### **La Heladera**
 - Se encarga de tomar todos los videos que tengan más de 3 meses almacenados en el almacenamiento interno de Tumimeras (en caliente), archivarlos y enviarlos a la base de datos histórica de videos para ser almacenados en frío.
   - A cada video también se le asocia su fecha de grabación y un identificador de su cámara para no perder la información de donde fue grabado.
+  - Debe traducir el formato completo del video almacenado en Tumimeras a un archivo.mp4, y dos metadatos: timestamp de grabación, e id de cámara de origen. A continuación se le asigna una id única al video y se almacena el .mp4 en `DB histórica de videos` (basada en minIO) usando la id del video, y los 2 metadatos se almacenan en `DB de datos de videos históricos` (basada en postgreSQL) con la id de video como identificador.
   - Cada noche realiza la transferencia de los videos que durante ese día cumplieron los 3 meses.
-  - "Enfría" los videos almacenados.
+  - En resumen, "enfría" los videos almacenados.
 - **Interfaces usadas**  
   - `OlderVideosProvider` 
 
 ---
 
-### **Recolector de videos fríos**
-- Intermediario entre Consultor de videos y la DB histórica de videos.
-  -  Entrega los videos aún archivados.
+### **Persistencia videos fríos**
+- Intermediario entre Consultor de videos y la DB de videos.
+  - Debe abstraer al Consultor de videos de la complejidad del sistema de almacenamiento en frio. El Consultor debe entender que todo (metadatos y videos) está en una misma base de datos.
+  - Entrega los videos aún archivados.
 - **Interfaces ofrecidas**  
-  - `DBProvider` (DB histórica de videos, solo lectura)
+  - `DBProvider` (DB de videos)
 
 ---
 
@@ -256,13 +263,23 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ## Capa de Datos
 
 ### **DB general**
+- Base de datos relacional basada en PostgreSQL.
 - Guarda entidades de todo tipo (edificios, usuarios, dispositivos), logs de interacciones del sistema, logs de eventos (incidentes, accesos, apertura de puertas, etc), toda la información válida de acceso para cada puerta, y datos de autenticación de los usuarios (identificador y contraseña).
 
 ### **DB histórica de videos**
+- Técnicamente no es una DB, es un *sistema de almacenamiento de archivos*.
+- Basado en minIO.
+- La ruta de cada video es única según su id.
 - Archivado en frío de grabaciones de hace más de 3 meses.
 
+### **DB de datos de videos históricos**
+- Complementa a la anterior.
+- Base de datos relacional basada en PostgreSQL.
+- Almacena el timestamp de grabación, la cámara de origen, y un id único para cada video almacenado.
+
 ### **DB local de tags**
-- Persistencia de credenciales (solo tag RFID) para operación de las puertas en modo degradado.
+- Pequeña base de datos relacional basada en SQLite.
+- Mantiene una persistencia de credenciales (solo tag RFID) para operación de las puertas en modo degradado.
 
 ---
 

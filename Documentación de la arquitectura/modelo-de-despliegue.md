@@ -67,9 +67,14 @@ Este documento describe el modelo de despliegue para el sistema WolfSys, explica
 - Base de datos PostgreSQL.
 - Contiene datos generales del sistema: usuarios, edificios, roles, accesos, logs, autenticación.
 
-### **DB Videos**
-- Almacenamiento en frío para videos históricos.
+### **DB Datos Crudos Videos**
+- Base de datos PostgreSQL.
 - Accedida por los servicios de negocio cuando se solicitan videos antiguos.
+- Referencia a los videos en el storage.
+
+### **Storage Videos**
+- Storage MinIO con redundancia.
+- Contiene los videos en formato .mp4.
 
 ### **La Heladera**
 - Componente de archivado de videos.

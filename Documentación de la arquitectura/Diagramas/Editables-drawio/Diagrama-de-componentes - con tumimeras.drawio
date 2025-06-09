@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.4">
   <diagram name="Vista de Componentes de Alto Nivel" id="XgYhL_Q5aQ_7c3n0z8jG">
-    <mxGraphModel dx="475" dy="274" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="823" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -457,7 +457,7 @@
         <mxCell id="S-wfzaOlgkgEpIh9Br1b-68" value="DBProvider" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="680" y="561" as="geometry" />
         </mxCell>
-        <mxCell id="S-wfzaOlgkgEpIh9Br1b-69" value="Recolector de videos fríos" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+        <mxCell id="S-wfzaOlgkgEpIh9Br1b-69" value="Persistencia videos fríos" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="273.5" y="617" width="196.5" height="49" as="geometry" />
         </mxCell>
         <mxCell id="S-wfzaOlgkgEpIh9Br1b-70" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=halfCircle;endFill=0;endSize=6;strokeWidth=1;sketch=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="DKqnZgWaFf-IS6omjSuh-79" target="S-wfzaOlgkgEpIh9Br1b-72" edge="1">
@@ -829,10 +829,10 @@
             <mxPoint x="220" y="732" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4KHK3tETtPd6oY9cXHSC-1" value="Tumimeras" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="4KHK3tETtPd6oY9cXHSC-1" value="Tumimeras" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="47" y="316" width="100" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="4KHK3tETtPd6oY9cXHSC-2" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=0;sketch=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;endSize=10;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="4KHK3tETtPd6oY9cXHSC-1">
+        <mxCell id="4KHK3tETtPd6oY9cXHSC-2" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=0;sketch=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;endSize=10;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="4KHK3tETtPd6oY9cXHSC-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="59.83" y="364.5" as="sourcePoint" />
             <mxPoint x="20" y="440" as="targetPoint" />
@@ -841,7 +841,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="4KHK3tETtPd6oY9cXHSC-3" value="CameraAuth" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4KHK3tETtPd6oY9cXHSC-2">
+        <mxCell id="4KHK3tETtPd6oY9cXHSC-3" value="CameraAuth" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4KHK3tETtPd6oY9cXHSC-2" vertex="1" connectable="0">
           <mxGeometry x="0.6934" relative="1" as="geometry">
             <mxPoint y="16" as="offset" />
           </mxGeometry>

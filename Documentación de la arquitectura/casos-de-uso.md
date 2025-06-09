@@ -43,7 +43,13 @@
 - **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
   - **C.U. 30:** Autentica cámaras.
   - **C.U. 31:** Expone endpoints HTTP para listar y consumir streams disponibles.  
-  - **C.U. 32:** Almacena las grabaciones, hasta 3 meses en caliente y luego en frío.  
+  - **C.U. 32:** Almacena las grabaciones, hasta 3 meses en caliente y luego en frío.
+
+- **Dispositivos de acceso (puertas automáticas, porteros, barreras, etc)**
+  - **C.U. 33:** Abrirse
+
+- **Dispositivos de reproducción de audio (porteros con parlante)**
+  - **C.U. 34:** Recibir y reproducir una transmisión en tiempo real.
 
 ---
 ## Diagrama de contexto:

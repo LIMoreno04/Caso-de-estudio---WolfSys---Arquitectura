@@ -120,7 +120,8 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 - Autentica dispositivos de vigilancia.
   - Expone los streams en tiempo real, a través de endpoints HTTP.
   - Almacena las grabaciones automáticamente en su memoria interna.
-- Cuando se le solicita una grabación con menos de 3 meses de grabada, dada su fecha y su cámara de origen, lo transmite a través de la interfaz `NewerVideosProvider`.
+- Cuando se le solicita una grabación con menos de 3 meses de grabada, dada su fecha y su cámara de origen, lo transmite (a través de la interfaz `NewerVideosProvider`).
+- Si se le solicita una grabación a través de `OlderVideosProvider`, inmediatamente luego de transmitirla la borra de su almacenamiento interno. Esta funcionalidad está configurada para limitarse únicamente a videos con más de 3 meses de almacenados.
 - **Interfaces ofrecidas**
   - `CameraAuth`
   - `StreamProvider`
@@ -241,8 +242,9 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ### **La Heladera**
 - Se encarga de tomar todos los videos que tengan más de 3 meses almacenados en el almacenamiento interno de Tumimeras (en caliente), archivarlos y enviarlos a la base de datos histórica de videos para ser almacenados en frío.
   - A cada video también se le asocia su fecha de grabación y un identificador de su cámara para no perder la información de donde fue grabado.
-  - Debe traducir el formato completo del video almacenado en Tumimeras a un archivo.mp4, y dos metadatos: timestamp de grabación, e id de cámara de origen. A continuación se le asigna una id única al video y se almacena el .mp4 en `DB histórica de videos` (basada en minIO) usando la id del video, y los 2 metadatos se almacenan en `DB de datos de videos históricos` (basada en postgreSQL) con la id de video como identificador.
+  - Debe traducir el formato completo del video almacenado en Tumimeras a un archivo.mp4.zst, y dos metadatos: timestamp de grabación, e id de cámara de origen. A continuación se le asigna una id única al video y se almacena el .mp4.zst en `DB histórica de videos` (basada en minIO) usando la id del video, y los 2 metadatos se almacenan en `DB de datos de videos históricos` (basada en postgreSQL) con la id de video como identificador.
   - Cada noche realiza la transferencia de los videos que durante ese día cumplieron los 3 meses.
+  - Hay dos DB de videos, y es trabajo de la Heladera realizar la transferencia hacia una de ellas, tornándola inusable durante el proceso (periodo durante el cual se debe usar la otra para consultas); para posteriormente liberarla y comenzar la transferencia hacia la otra.
   - En resumen, "enfría" los videos almacenados.
 - **Interfaces usadas**  
   - `OlderVideosProvider` 
@@ -252,7 +254,8 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 ### **Persistencia videos fríos**
 - Intermediario entre Consultor de videos y la DB de videos.
   - Debe abstraer al Consultor de videos de la complejidad del sistema de almacenamiento en frio. El Consultor debe entender que todo (metadatos y videos) está en una misma base de datos.
-  - Entrega los videos aún archivados.
+  - Entrega los videos aún archivados (.mp4.zst).
+- Adicionalmente, se tendrá una réplica de la DB de videos, y es el trabajo de este componente el mantenerlas sincronizadas.
 - **Interfaces ofrecidas**  
   - `DBProvider` (DB de videos)
 

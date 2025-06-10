@@ -40,10 +40,10 @@
   - **C.U. 23:** Iniciar sesión en la interfaz administrativa.
   - **C.U. 29:** Configura y gestiona equipos en instalaciones.  
 
-- **Sistema “Tumimeras” (Proveedor de Videostreaming)**  
-  - **C.U. 30:** Autentica cámaras.
-  - **C.U. 31:** Expone endpoints HTTP para listar y consumir streams disponibles.  
-  - **C.U. 32:** Almacena las grabaciones, hasta 3 meses en caliente y luego en frío.
+- **Dispositivos de vigilancia**  
+  - **C.U. 30:** Autenticarse.
+  - **C.U. 31:** Transmitir su stream en directo.  
+  - **C.U. 32:** Almacenar sus grabaciones, hasta 3 meses en caliente y luego en frío.
 
 - **Dispositivos de acceso (puertas automáticas, porteros, barreras, etc)**
   - **C.U. 33:** Abrirse

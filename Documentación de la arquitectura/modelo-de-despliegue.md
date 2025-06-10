@@ -4,7 +4,7 @@ Este documento describe el modelo de despliegue para el sistema WolfSys, explica
 
 ---
 
-## Capa de Presentación (Frontend)
+## Capa de Presentación 
 
 ### **App Móvil**
 - Aplicación para residentes (iOS/Android).
@@ -14,7 +14,7 @@ Este documento describe el modelo de despliegue para el sistema WolfSys, explica
 - Interfaz para agentes de vigilancia desde navegador.
 - Permite visualizar transmisiones priorizadas, consultar eventos, registrar incidentes e interactuar con accesos y residentes.
 
-### **Panel Admin**
+### **Panel Admin Web**
 - Panel para administradores del sistema (WolfSys, edificios, técnicos).
 - Administra usuarios, edificios, dispositivos, accesos, y logs del sistema.
 
@@ -41,7 +41,7 @@ Este documento describe el modelo de despliegue para el sistema WolfSys, explica
 ## Capa de Servicios de Aplicación
 
 ### **Servidor Aplicación**
-- B.O.B + APIs.
+- B.O.B + APIs + Frontend hosteado.
 - Gestiona autenticación de usuarios, recibe peticiones de las apps y las enruta según los permisos asociados.
 - Se comunica con la base de datos general y delega funciones específicas a los servicios de negocio.
 

@@ -116,6 +116,19 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 
 ---
 
+### **Tumimeras**
+- Autentica dispositivos de vigilancia.
+  - Expone los streams en tiempo real, a través de endpoints HTTP.
+  - Almacena las grabaciones automáticamente en su memoria interna.
+- Cuando se le solicita una grabación con menos de 3 meses de grabada, dada su fecha y su cámara de origen, lo transmite a través de la interfaz `NewerVideosProvider`.
+- **Interfaces ofrecidas**
+  - `CameraAuth`
+  - `StreamProvider`
+  - `NewerVideosProvider`
+  - `OlderVideosProvider`
+
+---
+
 ## **Servicio de datos (CRM)**
 
 ### **Registro de incidentes**

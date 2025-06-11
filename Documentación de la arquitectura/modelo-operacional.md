@@ -8,27 +8,25 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 
 ### 1. Dispositivos Cliente
 - **Móvil, PC**  
-  Interactúan con el sistema mediante el frontend. Acceden a métricas, reportes, visualización de videos y gestión operativa.
+  Interactúan con el sistema mediante el frontend. Acceden a las aplicaciones web/mobile.
 
 ---
 
 ### 2. Servidores WolfSys
 
 #### Frontend
-- Aplicación web de acceso para usuarios y operadores.
-- Hospedada en un servidor dedicado para garantizar disponibilidad.
+- Aplicación web/mobile de acceso para usuarios, administrativos y agentes de vigilancia.
+- Hosteado en un servidor.
 
 #### Servidores de Procesamiento
 - **Procesamiento 1 y 2**: 
   - 16 núcleos, 64GB RAM, 2TB SSD.
-  - Se encargan del análisis de video, transcodificación, detección de eventos y procesamiento paralelo.
+
 - **Módulo Removible**:
   - 4 núcleos, 16GB RAM, 512GB SSD.
-  - Permite procesamiento portátil o redundante.
 
 #### Edge Gateway
 - Servidor físico Linux, 8 núcleos, 32GB RAM, 1TB SSD.
-- Funciona como punto de integración con el Edificio Local.
 - Administra flujos entrantes de datos en tiempo real.
 
 #### Servidor de Control
@@ -51,9 +49,6 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 - 8 núcleos, 2GB RAM, 1TB SSD.
 - Manejo de datos de configuración, usuarios, logs, accesos.
 
-#### “La Heladera” (almacenamiento secundario)
-- 8 núcleos, 16GB RAM, 1TB SSD.
-- Nodo para almacenamiento intermedio o recuperación de video menos consultado.
 
 ---
 
@@ -63,6 +58,13 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 - Conectados directamente a la DB de Videos para descarga de datos en caliente.
 
 ---
+
+### 5. "La Heladera" (Módulo de Enfriamiento de Video)
+- 8 núcleos, 16GB RAM, 1TB SSD.
+-  **Almacena:**
+   - El `.mp4.zst` en una de las **DB Históricas de Video (MinIO)**.
+   - Los metadatos en una **DB de Datos Históricos (PostgreSQL)**, referenciados por la misma ID.
+
 
 ## Edificio Local
 
@@ -98,6 +100,4 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 ## Modelo operacional
 
 ![Modelo operacional](Diagramas/Exportados/Modelo-operacional.png)
-<!-- Asegurate de que el archivo esté en la misma carpeta o ajustá la ruta -->
 
----

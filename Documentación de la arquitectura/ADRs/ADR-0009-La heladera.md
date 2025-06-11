@@ -24,9 +24,9 @@ optimizada para bajo costo y menor prioridad de acceso.
 Se decidió incorporar el componente La Heladera como responsable de gestionar el almacenamiento en frío de 
 los videos históricos. Sus responsabilidades incluyen:
 - Consultar periódicamente la base de datos de Tumimeras para identificar videos cuya antigüedad haya superado los 3 meses.
-- Extraer esos videos de la base de datos de Tumimeras.
-- Convertir los videos al formato de archivo adecuado (en nuestro caso, una representación en string de bits puros del video).
-- Almacenar dichos archivos en la base de datos de almacenamiento en frío.
+- Extraer esos videos y sus metadatos de la base de datos de Tumimeras.
+- Convertir los videos al formato de archivo adecuado (en nuestro caso un .mp4.zst).
+- Almacenar dichos archivos en el sistema de archivos de almacenamiento en frío, y los metadatos asociados en la base de datos adyacente.
 
 ## Factores decisivos
 1. Desacoplar el almacenamiento en caliente y en frío, evitando que un solo componente maneje ambas lógicas.
@@ -49,6 +49,7 @@ al migrar contenidos antiguos.
 - Mayor complejidad operativa: se requiere una tarea o proceso adicional para monitorear y migrar videos.
 - Duplicación temporal de datos: puede haber un período en el que el video esté tanto en Tumimeras como en
  el almacenamiento en frío hasta que se complete la migración y eliminación.
+- Periodo de indisponibilidad de la base de datos de videos históricos, mientras la Heladera realiza la transmisión.
 
 ## Consecuencias
 - Uso eficiente del almacenamiento en caliente: al mover automáticamente los videos antiguos fuera de Tumimeras, se libera espacio y se previenen sobrecargas en el sistema de acceso rápido.

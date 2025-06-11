@@ -46,7 +46,7 @@ Este documento describe el modelo de despliegue para el sistema **WolfSys**, exp
 - Componente de CRM.
 - Administra interacciones y datos relacionados con usuarios, eventos y contactos.
 
-### Módulo de Scoring
+### Módulo Removible (Scoring)
 - Contiene el modelo de scoring.
 - Prioriza transmisiones de video según contexto e historial.
 - Integrado al sistema de procesamiento para mejorar la eficiencia del monitoreo.

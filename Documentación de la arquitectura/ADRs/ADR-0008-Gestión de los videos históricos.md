@@ -20,7 +20,7 @@ Se decidió que el componente Tumimeras será responsable de gestionar el almace
 
 ## Factores decisivos
 1. Necesidad de acceso con una demora de hasta 3 segundos a videos durante los primeros 3 meses.
-2. Se desea mantener a Tumimeras enfocado únicamente en la gestión en caliente.
+2. Capacidad de configuración del almacenamiento de Tumimeras que permite enfocarlo únicamente a la gestión en caliente.
 3. Simplificación de la arquitectura al centralizar el almacenamiento temporal en un único componente.
 4. Optimización del rendimiento en la lectura de videos recientes.
 

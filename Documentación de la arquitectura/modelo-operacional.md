@@ -67,21 +67,27 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
    - El `.mp4.zst` en una de las **DB Históricas de Video (MinIO)**.
    - Los metadatos en una **DB de Datos Históricos (PostgreSQL)**, referenciados por la misma ID.
 
+---
 
 ## Edificio Local
 
-#### Gateway Edificio
+### Gateway Edificio
 - CPU 4 núcleos, 8GB RAM, 64GB SSD.
 - Puente entre dispositivos físicos (acceso, audio) y el Edge Gateway.
 
-#### Edge Controller
+---
+
+### Edge Controller
 - CPU 2 núcleos, 2GB RAM, 16GB SSD.
 - Controla dispositivos de audio, porteros automáticos, alertas.
 
-#### DB Local
+---
+
+### DB Local
 - Almacenamiento mínimo para logs locales o eventos temporales.
 
 ---
+
 
 ## Justificación Técnica
 

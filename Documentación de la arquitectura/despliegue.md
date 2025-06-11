@@ -1,4 +1,4 @@
-# Modelo de Despliegue
+# Despliegue
 
 Este documento describe el modelo de despliegue para el sistema **WolfSys**, explicando las agrupaciones de componentes decididas, su despliegue operacional y sus relaciones. Para los detalles del funcionamiento de cada componente ver [Modelo de componentes](modelo-de-componentes.md)
 

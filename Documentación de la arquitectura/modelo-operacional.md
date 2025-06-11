@@ -85,6 +85,7 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 
 ### DB Local
 - Almacenamiento mínimo para logs locales o eventos temporales.
+- Se basa en SQLite, el hardware específico dependerá del edificio y sus necesidades.
 
 ---
 

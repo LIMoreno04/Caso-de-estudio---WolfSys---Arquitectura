@@ -38,12 +38,13 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 ### 3. Bases de Datos
 
 #### Main: DB de Videos
-- 8 núcleos, 64GB RAM, 20TB SSD RAID.
-- Almacenamiento primario de video proveniente de las tumimeras.
+- 8 núcleos, 64GB RAM, 8x30TB HDD con RAID 6.
+- 180TB de almacenamiento efectivo.
+- Almacenamiento en frío primario de videos provenientes de tumimeras.
 - Capacidad diseñada para grandes volúmenes de datos.
 
 #### Réplica: DB de Videos
-- Espejo en RAID para asegurar disponibilidad y tolerancia a fallos.
+- Espejo de la anterior para asegurar disponibilidad durante las transferencias, y para mayor tolerancia a fallos.
 
 #### DB Principal
 - 8 núcleos, 2GB RAM, 1TB SSD.
@@ -52,10 +53,11 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 
 ---
 
-### 4. Tumimeras (Nodos de Video Caliente)
+### 4. Tumimeras
 - 4 núcleos, 8GB RAM, 2TB SSD.
-- Dispositivos de vigilancia que graban y almacenan video localmente antes de enviarlo al sistema.
-- Conectados directamente a la DB de Videos para descarga de datos en caliente.
+- Almacenamiento de hasta 3 meses de videos en caliente.
+- Conectado directamente a el Edge Gateway para transmisión de videos almacenados en caliente.
+- Conectado directamente a la DB de Videos para descarga de datos a frío.
 
 ---
 
@@ -84,16 +86,15 @@ Este documento describe la arquitectura del sistema WolfSys, orientada a la gest
 ## Justificación Técnica
 
 ### Almacenamiento
-- Las bases de datos RAID de 20TB fueron dimensionadas considerando cargas de video provenientes de hasta cientos de tumimeras.
-- Se estima un consumo de hasta 100MB diarios por cámara, lo que equivale a 18TB anuales para 200 cámaras.
+- Las bases de datos RAID para 180TB fueron dimensionadas considerando cargas de video provenientes de cientos de edificios, cada uno con varias cámaras.
+- Se estima un consumo de hasta 100MB diarios por cámara, lo que equivale a 91TB anuales para 2500 cámaras (estimado de 500 edificios con un promedio de 5 cámaras por edificio).
 
 ### Procesamiento Distribuido
-- Dos servidores de procesamiento trabajan en paralelo para tareas intensivas.
-- El módulo removible permite traslado o recuperación portátil.
+- Dos servidores de procesamiento trabajan en paralelo, cada una con sus tareas intensivas designadas.
+- El módulo removible permite la fácil modificación o intercambio del mismo a un futuro. Pensado para los módulos de scoring con IA o criterios dinámicos que se plantean implementar.
 
 ### Redundancia y Alta Disponibilidad
-- Replicación entre bases de datos.
-- Edge Gateway interconectado con edificio local y servidores internos.
+- Replicación de la base de datos de videos.
 
 --
 

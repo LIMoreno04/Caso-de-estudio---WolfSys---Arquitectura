@@ -47,13 +47,13 @@
           <mxGeometry x="20" y="216.5" width="90" height="25" as="geometry" />
         </mxCell>
         <mxCell id="m0v21Xdj4hiuPf1z9c73-35" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="2104" y="639" width="140" height="100" as="geometry" />
+          <mxGeometry x="2104" y="639" width="140" height="111" as="geometry" />
         </mxCell>
         <mxCell id="0Tk5fZXrLw2a1cFThhE1-25" value="DB Local&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=0;" parent="m0v21Xdj4hiuPf1z9c73-35" vertex="1">
-          <mxGeometry width="140" height="100" as="geometry" />
+          <mxGeometry width="140" height="111.00000000000001" as="geometry" />
         </mxCell>
-        <mxCell id="0Tk5fZXrLw2a1cFThhE1-75" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;&amp;lt;&amp;lt;artifact&amp;gt;&amp;gt;&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;DB local de tags&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;- SQLite&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;fontColor=#000000;strokeColor=#2D7600;" parent="m0v21Xdj4hiuPf1z9c73-35" vertex="1">
-          <mxGeometry x="30" y="40" width="100" height="50" as="geometry" />
+        <mxCell id="0Tk5fZXrLw2a1cFThhE1-75" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;&amp;lt;&amp;lt;artifact&amp;gt;&amp;gt;&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;DB local de tags&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Persistencia local&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;- SQLite&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;fontColor=#000000;strokeColor=#2D7600;" parent="m0v21Xdj4hiuPf1z9c73-35" vertex="1">
+          <mxGeometry x="30" y="44.400000000000006" width="100" height="55.50000000000001" as="geometry" />
         </mxCell>
         <mxCell id="m0v21Xdj4hiuPf1z9c73-36" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2104" y="520" width="140" height="90" as="geometry" />
@@ -89,7 +89,7 @@
         <mxCell id="0Tk5fZXrLw2a1cFThhE1-19" value="DB Principal&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=0;" parent="ctdQVq7g29GabEfNCbRm-11" vertex="1">
           <mxGeometry width="169" height="110.5" as="geometry" />
         </mxCell>
-        <mxCell id="0Tk5fZXrLw2a1cFThhE1-63" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;&amp;lt;&amp;lt;artifact&amp;gt;&amp;gt;&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;DB General&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 11px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;PostgreSQL&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;fontColor=#000000;strokeColor=#2D7600;" parent="ctdQVq7g29GabEfNCbRm-11" vertex="1">
+        <mxCell id="0Tk5fZXrLw2a1cFThhE1-63" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;&amp;lt;&amp;lt;artifact&amp;gt;&amp;gt;&lt;/span&gt;&lt;br style=&quot;font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;DB General&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Persistencia gral.&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 11px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;PostgreSQL&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;fontColor=#000000;strokeColor=#2D7600;" parent="ctdQVq7g29GabEfNCbRm-11" vertex="1">
           <mxGeometry x="45.5" y="50.33888888888889" width="103.99999999999999" height="55.25" as="geometry" />
         </mxCell>
         <mxCell id="m0v21Xdj4hiuPf1z9c73-32" value="" style="endArrow=none;html=1;rounded=0;exitX=0.399;exitY=0.09;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.336;entryY=1.002;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="0Tk5fZXrLw2a1cFThhE1-19" target="m0v21Xdj4hiuPf1z9c73-2" edge="1">

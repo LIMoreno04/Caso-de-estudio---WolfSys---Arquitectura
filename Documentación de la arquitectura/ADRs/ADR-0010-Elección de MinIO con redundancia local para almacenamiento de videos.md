@@ -60,4 +60,4 @@ Se optó por utilizar **MinIO** como solución de almacenamiento tipo S3, desple
 
 ## Consecuencias
 
-El componente de almacenamiento de videos (“La Heladera”) se implementará usando MinIO con redundancia local. En la documentación y diagramas, este servicio se clasifica como **servicio interno** autoalojado y cumple el rol de cold storage. Se evitarán dependencias de servicios cloud, y se establecerán rutinas de verificación de integridad, backup y failover para garantizar la resiliencia de los datos almacenados.
+Al implementarse con redundancia local se requerirá que La Heladera sepa interactuar con ambos nodos, uno a la vez para garantizar disponibilidad. Adicionalmente se requerirá implementar lógica de sincronización en algún componente adyacente.

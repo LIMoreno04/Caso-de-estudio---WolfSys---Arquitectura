@@ -1,4 +1,4 @@
-# Modelo Operacional – Arquitectura WolfSys
+# Modelo Operacional
 
 Este documento describe la arquitectura del sistema WolfSys, orientada a la gestión, procesamiento y almacenamiento eficiente de videos provenientes de dispositivos de vigilancia, con integración de acceso y servicios internos.
 

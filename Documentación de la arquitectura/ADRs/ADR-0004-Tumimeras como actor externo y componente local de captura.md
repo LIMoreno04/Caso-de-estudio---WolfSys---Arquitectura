@@ -14,7 +14,7 @@ Tumimeras como actor externo y componente local de captura
 
 ## Estado
 
-Rechazada
+Rechazada y olvidada. Ignorar.
 
 ## Contexto
 

@@ -1,8 +1,8 @@
-# ADR-0012: Elección de MinIO con redundancia local para almacenamiento de videos
+# ADR-0010: Elección de MinIO con redundancia local para almacenamiento de videos
 
 ## ID
 
-0012
+0010
 
 ## Título
 

@@ -13,14 +13,26 @@ Este repositorio contiene nuestra propuesta de arquitectura para el sistema de p
 
 ## Estructura del Repositorio
 
+- **`índice.md`**  
+  Mapa de contenido que enlaza a todos los documentos y diagramas.
+
 - **`documentación-de-la-arquitectura/contexto.md`**  
   Describe el negocio de WolfSys, la plataforma actual, necesidades emergentes y motivaciones para el rediseño.
 
 - **`documentación-de-la-arquitectura/visión.md`**  
-  Presenta los objetivos generales de la arquitectura, actores, casos de uso, requerimientos funcionales y no funcionales, y la visión de componentes a alto nivel.
+  Presenta los objetivos generales de la arquitectura, con los requerimientos funcionales y no funcionales.
 
-- **`documentación-de-la-arquitectura/índice.md`**  
-  Mapa de contenido que enlaza a todos los documentos y diagramas.
+- **`documentación-de-la-arquitectura/casos-de-uso.md`**  
+  Todos los actores con sus respectivos casos de uso.
+
+  - **`documentación-de-la-arquitectura/modelo-de-componentes.md`**  
+  Presentación y explicación de todo el modelo de componentes.
+
+  - **`documentación-de-la-arquitectura/modelo-operacional.md`**  
+  Presentación de la propuesta para los equipos, servidores, y tecnologías a usar en nuestra solución.
+
+  - **`documentación-de-la-arquitectura/despliegue.md`**  
+  Se comenta qué componentes entran en qué equipos, formando respectivos artefactos.
 
 - **`documentación-de-la-arquitectura/decisiones/`**  
   Carpeta con los registros de las decisiones arquitectónicas **(ADRs)**:

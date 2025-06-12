@@ -222,7 +222,7 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
 - Dispositivo conectado a todas las puertas y barreras que deban ser controladas por el sistema.
   - Las controla a través de la interfaz `Abridor`.
 - Ejecuta apertura remota de puertas al recibir la petición desde `AccessControl`.
-- Ejecuta validación local de métodos de apertura de puertas (tags, PINs, biometría).
+- Ejecuta validación local de métodos de apertura de puertas (tags, PINs, biometría) a través de `Autenticador`.
   - Sólo permite usar métodos que considere "válidos" en ese momento.
 - Sincroniza eventos e información de acceso con el Gateway.
   - En intervalos regulares, le pide al Gateway su información de acceso válida más reciente.
@@ -234,6 +234,7 @@ Como fue mencionado, la capa de negocio se divide en 3 servicios principales:
   - `DBProvider` (DB local de tags)  
 - **Interfaces ofrecidas**  
   - `AccessControl`
+  - `Autenticador`
 
 ---
 
